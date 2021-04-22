@@ -1,16 +1,75 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
 
-import { AppComponent } from './app.component';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {PaginationModule} from 'ngx-bootstrap/pagination';
+import {AlertModule} from 'ngx-bootstrap/alert';
+import {BsDatepickerModule} from 'ngx-bootstrap/datepicker';
+import {CarouselModule} from 'ngx-bootstrap/carousel';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import {JwBootstrapSwitchNg2Module} from 'jw-bootstrap-switch-ng2';
+import {PopoverModule} from 'ngx-bootstrap/popover';
+
+import {PagesModule} from './pages/pages.module';
+import {IndexComponent} from './pages/index/index.component';
+import {ListPageComponent} from './pages/listPage/listPage.component';
+import {ShortcutListItemComponent} from './views/listItems/shortcutListItem.component';
+import {ShortcutPageComponent} from './pages/shortcutPage/shortcutPage.component';
+import {NavComponentComponent} from './views/navComponent/navComponent.component';
+import {FooterComponentComponent} from './views/footerComponent/footerComponent.component';
+import {ProfilePageComponent} from './pages/profilePage/profilePage.component';
+import {Page404Component} from './pages/page404/page404.component';
+import {CategoriesPageComponent} from './pages/categoriesPage/categoriesPage.component';
+import {CategoryListItemComponent} from './views/listItems/categoryListItem.component';
+import {RegisterPageComponent} from './pages/registerPage/registerPage.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IndexComponent,
+    ListPageComponent,
+    ShortcutListItemComponent,
+    ShortcutPageComponent,
+    NavComponentComponent,
+    FooterComponentComponent,
+    ProfilePageComponent,
+    Page404Component,
+    CategoriesPageComponent,
+    CategoryListItemComponent,
+    RegisterPageComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    PagesModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TooltipModule.forRoot(),
+    PopoverModule.forRoot(),
+    CollapseModule.forRoot(),
+    JwBootstrapSwitchNg2Module,
+    TabsModule.forRoot(),
+    PaginationModule.forRoot(),
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    CarouselModule.forRoot(),
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

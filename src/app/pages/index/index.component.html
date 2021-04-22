@@ -1,0 +1,24 @@
+<app-nav></app-nav>
+<div class="wrapper">
+  <div class="page-header header-filter">
+    <div class="squares square1"></div>
+    <div class="squares square2"></div>
+    <div class="squares square3"></div>
+    <div class="squares square4"></div>
+    <div class="squares square5"></div>
+    <div class="squares square6"></div>
+    <div class="squares square7"></div>
+    <div class="container">
+      <div class="content-center brand">
+        <h1 class="h1-seo" style="text-align:center;"><span>{{title}}</span> {{store}}</h1>
+        <h3>
+          Find your favourite shortcuts for iPhone and iPad, or add the ones you've created. <br/><br/>
+          <a class="page-link" [routerLink]="['/list', newCate]">Browse the newest shortcuts</a><br/>
+          <a class="card-link" [routerLink]="['/list', popularCate]">Or the most popular</a><br/>
+          <a class="card-link" [routerLink]="['/categories']">Or check our categories</a>
+        </h3>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

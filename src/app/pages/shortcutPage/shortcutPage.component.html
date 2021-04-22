@@ -1,0 +1,61 @@
+<app-nav></app-nav>
+<div class="wrapper">
+    <div class="page-header">
+        <img class="path" src="../../../assets/img/blob.png" />
+
+        <img class="path2" src="../../../assets/img/path2.png" />
+
+        <img class="shapes triangle" src="../../../assets/img/triunghiuri.png" />
+
+        <img class="shapes wave" src="../../../assets/img/waves.png" />
+
+        <img class="shapes squares" src="../../../assets/img/patrat.png" />
+
+        <img class="shapes circle" src="../../../assets/img/cercuri.png" />
+
+        <div class="content-center">
+            <div
+                    class="row row-grid justify-content-between align-items-center text-left"
+            >
+                <div class="col-lg-6 col-md-6">
+                    <h1 class="text-white">
+                        {{item.name}} <br/>
+                        <h5>
+                            by
+<!--                            TODO add id for profile-->
+                            <a [routerLink]= "['/profile']">
+                                {{item.authorUsername}}
+                            </a>
+                        </h5>
+                    </h1>
+                    <p class="text-white mb-3">
+                        {{item.description}}
+                    </p>
+                    <h3>
+                        Required apps: <br/>
+                        <span>
+                            <h4>
+                                {{item.requiredApps == null ? "No apps required for this shortcut" : item.requiredApps.join(", ")}}
+                            </h4>
+                        </span>
+                    </h3>
+                    <div class="btn-wrapper mb-3">
+                        <a
+                                class="btn btn-success btn-link btn-sm"
+                                href="{{item.icloud}}"
+                                target="_blank"
+                        >
+                            <p class="category text-success d-inline mr-1">Get shortcut</p>
+                            <i class="tim-icons icon-minimal-right"> </i>
+                        </a>
+                    </div>
+                </div>
+                <div
+                        id="glyph"
+                        class="col-lg-4 col-md-5">
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

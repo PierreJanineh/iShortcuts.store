@@ -1,0 +1,30 @@
+<app-nav></app-nav>
+<div class="wrapper">
+  <section class="section section-lg">
+    <img class="path" src="../../../assets/img/path3.png" />
+
+    <div class="container">
+      <div class="">
+        <div class="col-md-4">
+          <hr class="line-info" />
+
+          <h1>
+            {{category.category}} <br/>
+            <span class="text-info"> Items count: {{category.items.length}} </span>
+          </h1>
+        </div>
+      </div>
+      <div class="row"
+        id ="list_row">
+        <app-shortcutitem
+                class="col-md-4"
+                *ngFor="let item of category.items"
+                [item]="item"
+                [num]="category.items.indexOf(item)+1"
+        >
+        </app-shortcutitem>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</div>

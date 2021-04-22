@@ -1,0 +1,28 @@
+<app-nav></app-nav>
+<div class="wrapper">
+  <section class="section section-lg">
+    <img class="path" src="../../../assets/img/path3.png" />
+
+    <div class="container">
+      <div class="">
+        <div class="col-md-4">
+          <hr class="line-info" />
+
+          <h1>
+            Categories <br/>
+          </h1>
+        </div>
+      </div>
+      <div class="row"
+           id ="list_row">
+        <app-categoryitem
+          class="col-md-4"
+          *ngFor="let category of categories"
+          [category]="category"
+        >
+        </app-categoryitem>
+      </div>
+    </div>
+  </section>
+  <app-footer></app-footer>
+</div>

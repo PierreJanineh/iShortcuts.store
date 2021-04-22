@@ -1,0 +1,22 @@
+<div class="card card-coin card-plain">
+    <div class="dropdown-header" style="align-self: center;" [attr.id]="'header' + num">
+
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h4 class="text-uppercase">{{item.name}}</h4>
+                <hr class="line-primary" />
+                <p> {{item.description}} </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-center">
+        <button
+          class="btn btn-primary btn-simple"
+          [routerLink]="['/shortcut', item.id]"
+        >
+          Get Shortcut
+        </button>
+    </div>
+</div>
