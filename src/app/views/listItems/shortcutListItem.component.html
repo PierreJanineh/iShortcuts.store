@@ -1,6 +1,8 @@
 <div class="card card-coin card-plain">
-    <div class="dropdown-header" style="align-self: center;" [attr.id]="'header' + num">
-
+    <div class="dropdown-header" style="align-self: center;">
+      <i [attr.id]="'header' + num"
+         [attr.class]="item.icon+' glyph'"
+         [attr.style]="'color: '+item.color"></i>
     </div>
     <div class="card-body">
         <div class="row">

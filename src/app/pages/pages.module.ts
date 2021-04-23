@@ -28,6 +28,8 @@ import {Page404Component} from './page404/page404.component';
 import {CategoriesPageComponent} from './categoriesPage/categoriesPage.component';
 import {CategoryListItemComponent} from '../views/listItems/categoryListItem.component';
 import {RegisterPageComponent} from './registerPage/registerPage.component';
+import {AboutPageComponent} from './aboutPage/aboutPage.component';
+import {LoadingSpinnerComponent} from '../views/loadingSpinnerComponent/loadingSpinner.component';
 
 @NgModule({
   imports: [

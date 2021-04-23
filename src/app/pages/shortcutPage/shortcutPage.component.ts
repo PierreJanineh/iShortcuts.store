@@ -25,16 +25,10 @@ export class ShortcutPageComponent implements OnInit, OnDestroy {
         this.item = item;
       }
     }
-    const glyphContainer = document.getElementById('glyph');
-    glyphContainer.insertAdjacentHTML('afterbegin', this.item.icon);
-    glyphContainer.firstElementChild.classList.add('glyph');
   }
 
   ngOnDestroy(): void {
       const body = document.getElementsByTagName('body')[0];
       body.classList.remove('landing-page');
-
-      const glyphContainer = document.getElementById('glyph');
-      glyphContainer.firstElementChild.remove();
   }
 }

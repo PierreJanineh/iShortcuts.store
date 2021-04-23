@@ -32,6 +32,9 @@ import {Page404Component} from './pages/page404/page404.component';
 import {CategoriesPageComponent} from './pages/categoriesPage/categoriesPage.component';
 import {CategoryListItemComponent} from './views/listItems/categoryListItem.component';
 import {RegisterPageComponent} from './pages/registerPage/registerPage.component';
+import {AboutPageComponent} from './pages/aboutPage/aboutPage.component';
+import {MatInputModule} from '@angular/material/input';
+import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSpinner.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import {RegisterPageComponent} from './pages/registerPage/registerPage.component
     CategoriesPageComponent,
     CategoryListItemComponent,
     RegisterPageComponent,
+    AboutPageComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +73,7 @@ import {RegisterPageComponent} from './pages/registerPage/registerPage.component
     BsDatepickerModule.forRoot(),
     CarouselModule.forRoot(),
     ModalModule.forRoot(),
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

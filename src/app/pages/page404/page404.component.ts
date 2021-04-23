@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Output } from '@angular/core';
-import {Constants} from '../base-pages.component';
 
 @Component({
   selector: 'app-404page',

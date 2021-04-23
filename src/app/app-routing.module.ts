@@ -14,20 +14,25 @@ import { Page404Component } from './pages/page404/page404.component';
 import { CategoriesPageComponent } from './pages/categoriesPage/categoriesPage.component';
 import { CategoryListItemComponent } from './views/listItems/categoryListItem.component';
 import { RegisterPageComponent } from './pages/registerPage/registerPage.component';
+import { AboutPageComponent } from './pages/aboutPage/aboutPage.component';
+import { LoadingSpinnerComponent } from './views/loadingSpinnerComponent/loadingSpinner.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: IndexComponent },
   { path: 'list/:category', component: ListPageComponent },
-  { path: 'item', component: ShortcutListItemComponent },
   { path: 'shortcut/:id', component: ShortcutPageComponent },
+  { path: 'profile/:username', component: ProfilePageComponent },
+  { path: 'categories', component: CategoriesPageComponent },
+  { path: 'register', component: RegisterPageComponent },
+  { path: 'about', component: AboutPageComponent },
+  { path: '**', component: Page404Component },
+  //Components
   { path: 'nav', component: NavComponentComponent },
   { path: 'footer', component: FooterComponentComponent },
-  { path: 'profile/:username', component: ProfilePageComponent },
-  { path: '404', component: Page404Component },
-  { path: 'categories', component: CategoriesPageComponent },
+  { path: 'spinner', component: LoadingSpinnerComponent },
+  { path: 'item', component: ShortcutListItemComponent },
   { path: 'categoriesitem', component: CategoryListItemComponent },
-  { path: 'register', component: RegisterPageComponent },
 ];
 
 @NgModule({
@@ -35,7 +40,8 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: true
+      useHash: true,
+      // scrollPositionRestoration: 'enabled'
     })
   ],
   exports: []

@@ -99,6 +99,12 @@
           <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
             <a
               class="dropdown-item"
+              [routerLink]="['/list', 'None']"
+            >
+              <i class="tim-icons icon-paper"> </i> None
+            </a>
+            <a
+              class="dropdown-item"
               *ngFor="let category of categories"
               [routerLink]="['/list', category]"
             >

@@ -52,7 +52,8 @@
                 </div>
                 <div
                         id="glyph"
-                        class="col-lg-4 col-md-5">
+                        [attr.class]="item.icon+' glyph col-lg-4 col-md-5'"
+                        [attr.style]="'color: '+item.color">
                 </div>
             </div>
         </div>

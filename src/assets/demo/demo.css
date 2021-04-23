@@ -525,3 +525,217 @@
 .nav-btn {
   width: 30vh;
 }
+
+/*Loading Spinner*/
+.container-spinner{
+  z-index: 99999;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: fixed;
+  top: 0;
+  text-align: -webkit-center;
+}
+
+.loaderBox{
+  z-index: 999999;
+  position:sticky;
+  position: -webkit-sticky;
+  /*All the animations are set to percentages of this box. So just change this box size below as needed.*/
+  height: 20vh;
+  width: 20vh;
+  margin-top: 40vh;
+}
+
+/*Snake*/
+.snake1{
+  position:absolute;
+  height:100%;
+  width:100%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(25, 0, 0) 50%);
+  animation: snake1 3s linear infinite;
+}
+.snake2{
+  position:absolute;
+  height:90%;
+  width:90%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(50, 0, 0) 50%);
+  animation: snake2 3s linear infinite;
+}
+.snake3{
+  position:absolute;
+  height:80%;
+  width:80%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(75, 0, 0) 50%);
+  animation: snake3 3s linear infinite;
+}
+.snake4{
+  position:absolute;
+  height:70%;
+  width:70%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(100, 0, 0) 50%);
+  animation: snake4 3s linear infinite;
+}
+.snake5{
+  position:absolute;
+  height:60%;
+  width:60%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(125, 0, 0) 50%);
+  animation: snake5 3s linear infinite;
+}
+.snake6{
+  position:absolute;
+  height:50%;
+  width:50%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(150, 0, 0) 50%);
+  animation: snake6 3s linear infinite;
+}
+.snake7{
+  position:absolute;
+  height:40%;
+  width:40%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(175, 0, 0) 50%);
+  animation: snake7 3s linear infinite;
+}
+.snake8{
+  position:absolute;
+  height:30%;
+  width:30%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(200, 0, 0) 50%);
+  animation: snake8 3s linear infinite;
+}
+.snake9{
+  position:absolute;
+  height:20%;
+  width:20%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(225, 0, 0) 50%);
+  animation: snake9 3s linear infinite;
+}
+.snake10{
+  position:absolute;
+  height:10%;
+  width:10%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  border-radius:100%;
+  background:linear-gradient(rgba(0,0,0,0) 50%, rgb(250, 0, 0) 50%);
+  animation: snake10 3s linear infinite;
+}
+@keyframes snake1{
+  0%{
+    transform:translate(-50%, -50%) rotateX(0deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(720deg);
+  }
+}
+@keyframes snake2{
+  0%{
+    transform:translate(-50%, -50%) rotateX(36deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(756deg);
+  }
+}
+@keyframes snake3{
+  0%{
+    transform:translate(-50%, -50%) rotateX(72deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(792deg);
+  }
+}
+@keyframes snake4{
+  0%{
+    transform:translate(-50%, -50%) rotateX(108deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(828deg);
+  }
+}
+@keyframes snake5{
+  0%{
+    transform:translate(-50%, -50%) rotateX(144deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(864deg);
+  }
+}
+@keyframes snake6{
+  0%{
+    transform:translate(-50%, -50%) rotateX(180deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(900deg);
+  }
+}
+@keyframes snake7{
+  0%{
+    transform:translate(-50%, -50%) rotateX(216deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(936deg);
+  }
+}
+@keyframes snake8{
+  0%{
+    transform:translate(-50%, -50%) rotateX(252deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(972deg);
+  }
+}
+@keyframes snake9{
+  0%{
+    transform:translate(-50%, -50%) rotateX(288deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(1008deg);
+  }
+}
+@keyframes snake10{
+  0%{
+    transform:translate(-50%, -50%) rotateX(324deg);
+  }
+  100%{
+    transform:translate(-50%, -50%) rotateX(1044deg);
+  }
+}

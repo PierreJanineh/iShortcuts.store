@@ -12,7 +12,7 @@ export class NavComponentComponent implements OnInit, OnDestroy {
   isCollapsed = true;
   account: Account = Account.getInstance();
 
-  categories: string[] = BasePagesComponent.allCategories();
+  categories: string[] = BasePagesComponent.categories;
 
   constructor() {}
   ngOnInit(): void {}

@@ -17,7 +17,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     body.classList.add('landing-page');
 
     const username = this.route.snapshot.paramMap.get("username");
-    this.user = User.getUserFromUsername(username);
+    // this.user = User.getUserFromUsername(username);
+    this.user = BasePagesComponent.getRandomUser();
   }
 
   ngOnDestroy() {

@@ -9,7 +9,6 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
   title = Constants.title;
   store = Constants.store;
 
-  isCollapsed = true;
   isLogin = true;
   focus;
   focus1;

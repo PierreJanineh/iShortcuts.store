@@ -9,18 +9,32 @@
           <hr class="line-info" />
 
           <h1>
-            {{category.category}} <br/>
-            <span class="text-info"> Items count: {{category.items.length}} </span>
+            {{isSearch? 'Search results for: ' + search: category.name}} <br/>
+            <span class="text-info"
+                  *ngIf="(!isSearch && category.items != null) || (isSearch && searchItems != null)">
+              Items count: {{isSearch? searchItems: category.items.length}}
+            </span>
+            <span class="text-info"
+                  *ngIf="isSearch && (searchItems == null || searchItems.length <= 0)">
+              No items were found, try another search.
+            </span>
+            <span class="text-info"
+                  *ngIf="!isSearch && (category.items == null || category.items.length <= 0)">
+              No items were found, try another search.
+            </span>
           </h1>
         </div>
+      </div>
+      <div class="row">
+
       </div>
       <div class="row"
         id ="list_row">
         <app-shortcutitem
                 class="col-md-4"
-                *ngFor="let item of category.items"
+                *ngFor="let item of items"
                 [item]="item"
-                [num]="category.items.indexOf(item)+1"
+                [num]="items.indexOf(item)+1"
         >
         </app-shortcutitem>
       </div>
@@ -28,3 +42,4 @@
   </section>
   <app-footer></app-footer>
 </div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
