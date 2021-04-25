@@ -26,7 +26,7 @@ export class FirebaseService {
     this.shortcutsRef = this.shortcutsCollection.valueChanges();
   }
 
-  getUserByUsername(username: string) {
+  getUserByUsername(username: string): Observable<User> {
     return this.usersCollection.doc(username).valueChanges();
   }
 

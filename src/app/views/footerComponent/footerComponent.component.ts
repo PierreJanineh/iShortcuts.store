@@ -23,8 +23,6 @@ export class FooterComponentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    var input = document.getElementById("input");
-
   }
 
   ngOnDestroy(): void {}

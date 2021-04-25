@@ -8,10 +8,10 @@
             <alert [type]="'primary'" *ngIf="alertTerms">
               Please read the terms and conditions!
             </alert>
-            <alert [type]="'primary'" *ngIf="usernameAlert$.getValue()">
+            <alert [type]="'primary'" *ngIf="(usernameAlert$ | async)">
               Login username is incorrect!
             </alert>
-            <alert [type]="'primary'" *ngIf="passwordAlert$.getValue()">
+            <alert [type]="'primary'" *ngIf="(passwordAlert$ | async)">
               Login password is incorrect!
             </alert>
         </div>

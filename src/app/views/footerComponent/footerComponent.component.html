@@ -10,13 +10,13 @@
           <li class="nav-item">
             <a class="nav-link" [routerLink]="['/categories']"> Categories </a>
           </li>
-          <li class="nav-item" *ngIf="(!account.loggedIn$)">
+          <li class="nav-item" *ngIf="(!(account.loggedIn$ | async))">
             <a class="nav-link" [routerLink]="['/register']">
               Login / Register
             </a>
           </li>
-          <li class="nav-item" *ngIf="(account.loggedIn$)">
-            <a class="nav-link" [routerLink]="['/profile', account.user.username]">
+          <li class="nav-item" *ngIf="((account.loggedIn$ | async))">
+            <a class="nav-link" [routerLink]="['/profile', account.user == null ? null : account.user.username]">
               Profile
             </a>
           </li>

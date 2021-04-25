@@ -26,8 +26,4 @@ export class User {
     return FirebaseService.getShortcutsForAuthor(this);
   }
 
-  public static getRandomUser(): User {
-    return new User("PierreJanineh", "123456", "http://pierrejanineh.com", "janinehpierre@gmail.com");
-  }
-
 }

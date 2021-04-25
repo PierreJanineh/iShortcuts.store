@@ -14,6 +14,7 @@ export class AppService {
 
   logIn(username: string, password: string, firebase: FirebaseService, usernameAlert$: BehaviorSubject<boolean>, passwordAlert$: BehaviorSubject<boolean>) {
     username = username.toLowerCase();
+    console.log(username);
     firebase.getUserByUsername(username).subscribe((user) => {
       if (user != null){
         if (user.password === password){
