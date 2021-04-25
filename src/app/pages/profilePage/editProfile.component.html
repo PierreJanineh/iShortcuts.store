@@ -31,7 +31,7 @@
                    type="text"
                    (focus)="focus = true"
                    (blur)="focus = false; checkUsernameExists(username.value)"
-                   value="{{user.username}}"
+                   value="{{(user | async)?.username}}"
                    disabled
             />
           </div>
@@ -50,7 +50,7 @@
                    type="email"
                    (focus)="focus1 = true"
                    (blur)="focus1 = false"
-                   value="{{user.email}}"
+                   value="{{(user | async)?.email}}"
             />
           </div>
           <div
@@ -68,7 +68,7 @@
                    type="url"
                    (focus)="focus2 = true"
                    (blur)="focus2 = false"
-                   value="{{user.url}}"
+                   value="{{(user | async)?.url}}"
             />
           </div>
           <div
@@ -86,7 +86,7 @@
                    type="password"
                    (focus)="focus3 = true"
                    (blur)="focus3 = false"
-                   value="{{user.password}}"
+                   value="{{(user | async)?.password}}"
             />
           </div>
         </form>
@@ -94,7 +94,7 @@
     </div>
     <button class="btn-primary floating-btn"
             (click)="updateInfo(username.value, email.value, url.value, pass.value)"
-            [routerLink]="['/profile', user.username]"><i class="tim-icons icon-check-2"></i></button>
+            [routerLink]="['/profile', (user | async)?.username]"><i class="tim-icons icon-check-2"></i></button>
   </div>
   <app-footer></app-footer>
 </div>

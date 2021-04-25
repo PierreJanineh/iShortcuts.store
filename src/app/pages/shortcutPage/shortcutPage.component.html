@@ -19,30 +19,30 @@
             >
                 <div class="col-lg-6 col-md-6">
                     <h1 class="text-white">
-                        {{item.name}} <br/>
+                        {{(item | async)?.name}} <br/>
                         <h5>
                             by
 <!--                            TODO add id for profile-->
                             <a [routerLink]= "['/profile']">
-                                {{item.authorUsername}}
+                                {{(item | async)?.authorUsername}}
                             </a>
                         </h5>
                     </h1>
                     <p class="text-white mb-3">
-                        {{item.description}}
+                        {{(item | async)?.description}}
                     </p>
                     <h3>
                         Required apps: <br/>
                         <span>
                             <h4>
-                                {{item.requiredApps == null ? "No apps required for this shortcut" : item.requiredApps.join(", ")}}
+                                {{(item | async)?.requiredApps == null ? "No apps required for this shortcut" : (item | async)?.requiredApps.join(", ")}}
                             </h4>
                         </span>
                     </h3>
                     <div class="btn-wrapper mb-3">
                         <a
                                 class="btn btn-success btn-link btn-sm"
-                                href="{{item.icloud}}"
+                                href="{{(item | async)?.icloud}}"
                                 target="_blank"
                         >
                             <p class="category text-success d-inline mr-1">Get shortcut</p>
@@ -52,8 +52,8 @@
                 </div>
                 <div
                         id="glyph"
-                        [attr.class]="item.icon+' glyph col-lg-4 col-md-5'"
-                        [attr.style]="'color: '+item.color">
+                        [attr.class]="(item | async)?.icon+' glyph col-lg-4 col-md-5'"
+                        [attr.style]="'color: '+(item | async)?.color">
                 </div>
             </div>
         </div>

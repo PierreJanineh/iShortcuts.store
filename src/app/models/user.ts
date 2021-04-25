@@ -14,16 +14,4 @@ export class User {
     this.email = email;
   }
 
-  public hasURL(): boolean {
-    return this.url != null;
-  }
-
-  public hasUploaded(): boolean {
-    return this.getShortcuts() != null;
-  }
-
-  public getShortcuts(): Shortcut[] {
-    return FirebaseService.getShortcutsForAuthor(this);
-  }
-
 }

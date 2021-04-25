@@ -3,7 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {User} from '../../models/user';
 import {FirebaseService} from '../../services/firebase.service';
 import {Account} from '../../models/account';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Shortcut} from '../../models/shortcut';
 
 @Component({
   selector: "app-profilepage",
@@ -11,7 +12,8 @@ import {Observable} from 'rxjs';
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
 
-  user: User;
+  user: Observable<User>;
+  items$: BehaviorSubject<Shortcut[]> = new BehaviorSubject<Shortcut[]>([]);
   isCollapsed = true;
   constructor(private route: ActivatedRoute, private router: Router, private firebase: FirebaseService) {
   }
@@ -21,11 +23,12 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     body.classList.add('landing-page');
 
     const username = this.route.snapshot.paramMap.get("username");
-    this.firebase.getUserByUsername(username).subscribe(user => {
-      this.user = new User(user.username, user.password, user.url, user.email);
+    this.user = this.firebase.getUserByUsername(username);
+    this.user.subscribe(user => {
+      this.getShortcuts(user.username);
     });
     // go home if logged out while on profile.
-    const subscription = Account.getInstance().loggedIn$.subscribe((bool) => {
+    Account.getInstance().loggedIn$.subscribe((bool) => {
       if (!bool) {
         this.router.navigate(['/home']);
       }
@@ -35,5 +38,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');
+  }
+
+  getShortcuts(username: string){
+    this.firebase.getShortcutsForAuthor(username, this.items$);
   }
 }

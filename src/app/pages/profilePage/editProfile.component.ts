@@ -12,7 +12,7 @@ import {AppService} from '../../services/app.service';
 })
 export class EditProfilePageComponent implements OnInit, OnDestroy {
 
-  user: User;
+  user: Observable<User>;
   usernameExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   isCollapsed = true;
   focus;
@@ -27,9 +27,7 @@ export class EditProfilePageComponent implements OnInit, OnDestroy {
     body.classList.add('landing-page');
 
     const username = this.route.snapshot.paramMap.get("username");
-    this.firebase.getUserByUsername(username).subscribe(user => {
-      this.user = new User(user.username, user.password, user.url, user.email);
-    });
+    this.user = this.firebase.getUserByUsername(username);
     // go home if logged out while on profile.
     const subscription = Account.getInstance().loggedIn$.subscribe((bool) => {
       if (!bool) {

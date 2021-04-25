@@ -17,29 +17,29 @@
       <div class="row row-grid justify-content-between align-items-center text-left">
         <div class="col-lg-6 col-md-6">
           <h1 class="text-white">
-            {{user.username}}
+            {{(user | async)?.username}}
           </h1>
           <br/>
-          <a class="text-success d-inline mr-1" *ngIf="user.hasURL()"
-             href="{{user.url}}">
-            {{user.url}}
+          <a class="text-success d-inline mr-1" *ngIf="(user | async)?.url != null"
+             href="{{(user | async)?.url}}">
+            {{(user | async)?.url}}
           </a>
           <br/>
-          <h5 class="text-white">E-mail: {{user.email}}</h5>
+          <h5 class="text-white">E-mail: {{(user | async)?.email}}</h5>
         </div>
         <div id="list"
              class="col-lg-4 col-md-5"
-             *ngIf="user.hasUploaded()"
+             *ngIf="(items$ | async).length > 0"
         >
           <ul class="list-group">
-            <li class="list-group-item text-black-50" *ngFor="let shortcut of user.getShortcuts()">
+            <li class="list-group-item text-black-50" *ngFor="let shortcut of (items$ | async)">
               <a class="nav-link" [routerLink]="['/shortcut', shortcut.id]">{{shortcut.name}}</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <button class="btn-primary floating-btn" [routerLink]="['/editProfile', user.username]"><i class="tim-icons icon-pencil"></i></button>
+    <button class="btn-primary floating-btn" [routerLink]="['/editProfile', (user | async)?.username]"><i class="tim-icons icon-pencil"></i></button>
   </div>
   <app-footer></app-footer>
 </div>

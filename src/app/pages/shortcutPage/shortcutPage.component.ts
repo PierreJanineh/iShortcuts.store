@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import {Shortcut} from '../../models/shortcut';
+import {FirebaseService} from '../../services/firebase.service';
+import {Observable} from 'rxjs';
 
 @Component({
     selector: 'app-shortcut',
@@ -8,23 +10,19 @@ import {Shortcut} from '../../models/shortcut';
 })
 
 export class ShortcutPageComponent implements OnInit, OnDestroy {
-  item: Shortcut;
+  item: Observable<Shortcut> = new Observable<Shortcut>();
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  constructor(private route: ActivatedRoute, private firebase: FirebaseService) {
+
+  }
 
   ngOnInit(): void {
     const body = document.getElementsByTagName('body')[0];
     body.classList.add('landing-page');
 
     const id: string = this.route.snapshot.paramMap.get("id");
-
-    //get item from all items by id TODO
-    const items = Shortcut.getAllItems();
-    for (const item of items){
-      if (item.id === id){
-        this.item = item;
-      }
-    }
+    this.item = this.firebase.getShortcutById(id);
   }
 
   ngOnDestroy(): void {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 import {Shortcut} from '../models/shortcut';
 import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference} from '@angular/fire/firestore';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Account} from '../models/account';
 
 @Injectable({
@@ -51,26 +51,44 @@ export class FirebaseService {
     return this.usersCollection.doc(username).delete();
   }
 
+  getShortcutById(id: string): Observable<Shortcut> {
+    return this.shortcutsCollection.doc(id).valueChanges();
+  }
+
   getAllShortcutsObservable(): Observable<Shortcut[]> {
     return this.shortcutsRef;
   }
 
   createShortcut(shortcut: Shortcut): any {
-    return this.shortcutsCollection.add(shortcut);
+    return this.shortcutsCollection.doc(shortcut.id).set(Object.assign({}, shortcut));
   }
 
   updateShortcut(key: string, shortcut: Shortcut): Promise<void> {
-    return this.shortcutsCollection.doc(key).update(shortcut);
+    return this.shortcutsCollection.doc(key).update({
+      "name": shortcut.name,
+      "description": shortcut.description,
+      "icloud": shortcut.icloud,
+      "categories": shortcut.categories,
+      "requiredApps": shortcut.requiredApps,
+      "icon": shortcut.icon,
+      "color": shortcut.color,
+      "authorUsername": shortcut.authorUsername
+    });
   }
 
   deleteShortcut(key: string): Promise<void> {
     return this.shortcutsCollection.doc(key).delete();
   }
 
-
-
-
-  public static getShortcutsForAuthor(user: User): Shortcut[] {
-    return null;
+  public getShortcutsForAuthor(username: string, items$: BehaviorSubject<Shortcut[]>) {
+    this.getAllShortcutsObservable().subscribe(items => {
+      const shorts: Shortcut[] = [];
+      for (const item of items){
+        if (item.authorUsername === username){
+          shorts[shorts.length] = item;
+        }
+      }
+      items$.next(shorts);
+    })
   }
 }
