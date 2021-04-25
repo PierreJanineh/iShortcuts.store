@@ -11,16 +11,16 @@
           <h1>
             {{isSearch? 'Search results for: ' + search: category.name}} <br/>
             <span class="text-info"
-                  *ngIf="(!isSearch && category.items != null) || (isSearch && searchItems != null)">
+                  *ngIf="itemsCount$ | async">
               Items count: {{isSearch? searchItems: category.items.length}}
             </span>
             <span class="text-info"
-                  *ngIf="isSearch && (searchItems == null || searchItems.length <= 0)">
+                  *ngIf="searchAlert$ | async">
               No items were found, try another search.
             </span>
             <span class="text-info"
-                  *ngIf="!isSearch && (category.items == null || category.items.length <= 0)">
-              No items were found, try another search.
+                  *ngIf="categoryAlert$ | async">
+              No items were found, try another category.
             </span>
           </h1>
         </div>

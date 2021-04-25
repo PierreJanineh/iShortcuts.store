@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Shortcut} from '../../models/shortcut';
 import {Category} from '../../models/category';
+import {FirebaseService} from '../../services/firebase.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-listpage',
@@ -16,11 +18,16 @@ export class ListPageComponent implements OnInit, OnDestroy {
   search: string;
   searchItems: Shortcut[];
   items: Shortcut[];
+  categoryAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  searchAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  itemsCount$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private firebase: FirebaseService) {}
 
   searchFunc(word: string): Shortcut[] {
     //TODO get items from DB
+    this.searchAlert$.next(this.searchCheck());
+    this.itemsCount$.next(this.itemCheck());
     return null;
   }
 
@@ -30,9 +37,15 @@ export class ListPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       params => {
         let cate: string = params['category'];
+        //Check if the path is a category or a search query (search queries start with '$').
         if (cate.charAt(0) != "$"){
-          this.category = Category.getCategoryFromString(cate);
-          this.items = this.category.items;
+          this.category = new Category(cate);
+          this.category.getAllItems(this.firebase).subscribe((shortcuts) => {
+            this.category.getAllItemsForCategoryFromAllItems(cate, shortcuts);
+            this.items = this.category.items;
+            this.itemsCount$.next(this.itemCheck());
+            this.categoryAlert$.next(this.categoryCheck());
+          });
           this.isSearch = false;
           this.isLoading = false;
         }else {
@@ -53,6 +66,18 @@ export class ListPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');
+  }
+
+  itemCheck(){
+    return (!this.isSearch && this.category.items != null && this.category.items.length > 0) || (this.isSearch && this.searchItems != null && this.searchItems.length > 0);
+  }
+
+  searchCheck(){
+    return this.isSearch && (this.searchItems == null || this.searchItems.length <= 0);
+  }
+
+  categoryCheck(){
+    return !this.isSearch && (this.category.items == null || this.category.items.length <= 0);
   }
 
 }

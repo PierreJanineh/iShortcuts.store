@@ -21,7 +21,7 @@ export class Shortcut {
               icon: Glyphs,
               color: Colors,
               authorUsername: string) {
-    this.id = /*Math.random()+"-"+*/name + '-' + categories + '-' + icloud + '-' + authorUsername;
+    this.id = Math.random() + "-" + name + '-' + categories + '-' + authorUsername;
     this.name = name;
     this.description = description;
     this.icloud = icloud;

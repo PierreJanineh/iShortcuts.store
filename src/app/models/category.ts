@@ -1,4 +1,6 @@
 import {Shortcut} from './shortcut';
+import {FirebaseService} from '../services/firebase.service';
+import {Observable} from 'rxjs';
 
 export class Category {
   name: string;
@@ -35,30 +37,24 @@ export class Category {
   ];
 
   constructor(name: string,
-              index: number) {
+              index?: number) {
     this.name = name;
-    if (name == 'None') {
-      this.index = 100;
-      this.items = [];
-      return;
-    }
     this.index = index;
-    this.items = Category.getAllItemsForCategory(name);
+    this.items = [];
   }
 
-  public getAllItemsFromDB(): Shortcut[] {
-    //TODO
-    return new Array();
+  getAllItems(firebase: FirebaseService): Observable<Shortcut[]>{
+    return firebase.getAllShortcutsObservable();
   }
 
-  public static getCategoryFromString(str: string): Category {
-    return new Category(str, this.categories.indexOf(str));
-  }
-
-  public static getAllItemsForCategory(category: string): Shortcut[] {
-    // TODO
-    // ServiceWithDB.getAllItemsFromDB(category);
-
-    return Shortcut.getAllItems();
+  getAllItemsForCategoryFromAllItems(category: string, shortcuts: Shortcut[]){
+    for (const short of shortcuts) {
+      for (const cate of short.categories){
+        if (cate === category) {
+          this.items[0] = short;
+          return;
+        }
+      }
+    }
   }
 }

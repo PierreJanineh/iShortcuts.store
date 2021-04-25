@@ -51,42 +51,6 @@
         </div>
       </div>
       <ul class="navbar-nav">
-        <!--li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href=""
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Twitter"
-          >
-            <i class="fab fa-twitter"> </i>
-            <p class="d-lg-none d-xl-none">Twitter</p>
-          </a>
-        </li>
-        <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href=""
-            placement="bottom"
-            target="_blank"
-            tooltip="Like us on Facebook"
-          >
-            <i class="fab fa-facebook-square"> </i>
-            <p class="d-lg-none d-xl-none">Facebook</p>
-          </a>
-        </li>
-        <li class="nav-item p-0">
-          <a
-            class="nav-link"
-            href=""
-            placement="bottom"
-            target="_blank"
-            tooltip="Follow us on Instagram"
-          >
-            <i class="fab fa-instagram"> </i>
-            <p class="d-lg-none d-xl-none">Instagram</p>
-          </a>
-        </li-->
         <li class="dropdown nav-item" dropdown>
           <a
             class="dropdown-toggle nav-link dropdown-toggle"
@@ -97,12 +61,6 @@
             <i class="fa fa-cogs d-lg-none d-xl-none"> </i> Categories
           </a>
           <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
-            <a
-              class="dropdown-item"
-              [routerLink]="['/list', 'None']"
-            >
-              <i class="tim-icons icon-paper"> </i> None
-            </a>
             <a
               class="dropdown-item"
               *ngFor="let category of categories"
