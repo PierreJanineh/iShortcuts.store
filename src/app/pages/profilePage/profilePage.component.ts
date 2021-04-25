@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
-import {BasePagesComponent, User} from '../base-pages.component';
+import { Router, ActivatedRoute } from '@angular/router';
+import {User} from '../../models/user';
 
 @Component({
   selector: "app-profilepage",
@@ -8,7 +8,7 @@ import {BasePagesComponent, User} from '../base-pages.component';
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
 
-  user: User = BasePagesComponent.getRandomUser();
+  user: User = User.getRandomUser();
   isCollapsed = true;
   constructor(private route: ActivatedRoute, private router: Router) {}
 
@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     const username = this.route.snapshot.paramMap.get("username");
     // this.user = User.getUserFromUsername(username);
-    this.user = BasePagesComponent.getRandomUser();
+    this.user = User.getRandomUser();
   }
 
   ngOnDestroy() {

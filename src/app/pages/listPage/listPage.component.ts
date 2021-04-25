@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
-import {BasePagesComponent, Category, Shortcut} from '../base-pages.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {Shortcut} from '../../models/shortcut';
+import {Category} from '../../models/category';
 
 @Component({
   selector: 'app-listpage',
@@ -30,7 +31,7 @@ export class ListPageComponent implements OnInit, OnDestroy {
       params => {
         let cate: string = params['category'];
         if (cate.charAt(0) != "$"){
-          this.category = BasePagesComponent.getCategoryFromString(cate);
+          this.category = Category.getCategoryFromString(cate);
           this.items = this.category.items;
           this.isSearch = false;
           this.isLoading = false;

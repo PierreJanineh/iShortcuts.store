@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Input, Output } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
-import {BasePagesComponent} from '../base-pages.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {Category} from '../../models/category';
 
 @Component({
   selector: 'app-categoriespage',
@@ -9,7 +9,7 @@ import {BasePagesComponent} from '../base-pages.component';
 
 export class CategoriesPageComponent implements OnInit, OnDestroy {
 
-  categories: string[] = BasePagesComponent.categories;
+  categories: string[] = Category.categories;
 
   constructor(private route: ActivatedRoute) {}
 

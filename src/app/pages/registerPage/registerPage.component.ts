@@ -1,5 +1,10 @@
 import {Component, OnInit, OnDestroy, OnChanges, HostListener, SimpleChanges} from '@angular/core';
 import {Constants} from '../base-pages.component';
+import {FirebaseService} from '../../services/firebase.service';
+import {AppService} from '../../services/app.service';
+import {BehaviorSubject} from 'rxjs';
+import {Account} from '../../models/account';
+import {Router} from '@angular/router';
 
 @Component({
   selector: "app-registerpage",
@@ -10,11 +15,17 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
   store = Constants.store;
 
   isLogin = true;
+  alertTerms = false;
+  usernameAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  passwordAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loggedIn$ = Account.getInstance().loggedIn$;
+  username: string;
   focus;
   focus1;
   focus2;
+  focus3;
 
-  constructor() {}
+  constructor(private firebase: FirebaseService, private service: AppService, private router: Router) { }
   @HostListener("document:mousemove", ["$event"])
   onMouseMove(e) {
     var squares1 = document.getElementById("square1");
@@ -79,9 +90,26 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
       "deg)";
   }
 
+  login(username: string, password: string){
+    //logs in and changes behaviours values.
+    this.username = username;
+    this.service.logIn(username, password, this.firebase, this.usernameAlert$, this.passwordAlert$);
+  }
+
+  register(username: string, password: string, url:string, email: string){
+    //registers and changes behaviours values.
+    this.service.register(username, password, email, url, this.firebase);
+  }
+
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
+
+    this.loggedIn$.subscribe((bool) => {
+      if (bool) {
+        this.router.navigate(['/profile', this.username]);
+      }
+    })
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

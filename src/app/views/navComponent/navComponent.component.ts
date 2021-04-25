@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {Account, BasePagesComponent, Constants} from '../../pages/base-pages.component';
+import {Constants} from '../../pages/base-pages.component';
+import {Account} from '../../models/account';
+import {Category} from '../../models/category';
+import {AppService} from '../../services/app.service';
 
 @Component({
   selector: 'app-nav',
@@ -10,11 +13,19 @@ export class NavComponentComponent implements OnInit, OnDestroy {
   title = Constants.title;
   store = Constants.store;
   isCollapsed = true;
-  account: Account = Account.getInstance();
+  loggedIn: boolean;
 
-  categories: string[] = BasePagesComponent.categories;
+  categories: string[] = Category.categories;
 
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(private service: AppService) {}
+  ngOnInit(): void {
+    Account.getInstance().loggedIn$.subscribe((bool) => {
+      this.loggedIn = bool;
+    })
+  }
   ngOnDestroy(): void {}
+
+  logout() {
+    this.service.logout();
+  }
 }

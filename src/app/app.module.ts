@@ -6,6 +6,9 @@ import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ProgressbarModule} from 'ngx-bootstrap/progressbar';
@@ -35,6 +38,8 @@ import {RegisterPageComponent} from './pages/registerPage/registerPage.component
 import {AboutPageComponent} from './pages/aboutPage/aboutPage.component';
 import {MatInputModule} from '@angular/material/input';
 import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSpinner.component';
+
+import {FirebaseService} from './services/firebase.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +79,8 @@ import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSp
     CarouselModule.forRoot(),
     ModalModule.forRoot(),
     MatInputModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

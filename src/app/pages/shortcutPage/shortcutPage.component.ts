@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationExtras } from '@angular/router';
-import {BasePagesComponent, Shortcut} from '../base-pages.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import {Shortcut} from '../../models/shortcut';
 
 @Component({
     selector: 'app-shortcut',
@@ -19,7 +19,7 @@ export class ShortcutPageComponent implements OnInit, OnDestroy {
     const id: string = this.route.snapshot.paramMap.get("id");
 
     //get item from all items by id TODO
-    const items = BasePagesComponent.getAllItems();
+    const items = Shortcut.getAllItems();
     for (const item of items){
       if (item.id === id){
         this.item = item;

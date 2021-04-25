@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, AfterViewInit, Input} from '@angular/core';
-import {Shortcut} from '../../pages/base-pages.component';
+import {Shortcut} from '../../models/shortcut';
 
 @Component({
     selector: 'app-shortcutitem',

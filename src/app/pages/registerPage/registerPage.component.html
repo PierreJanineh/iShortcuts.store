@@ -5,6 +5,20 @@
     <div class="content">
       <div class="container">
         <div class="row">
+            <alert [type]="'primary'" *ngIf="alertTerms">
+              Please read the terms and conditions!
+            </alert>
+            <alert [type]="'primary'" *ngIf="usernameAlert$.getValue()">
+              Login username is incorrect!
+            </alert>
+            <alert [type]="'primary'" *ngIf="passwordAlert$.getValue()">
+              Login password is incorrect!
+            </alert>
+            <alert [type]="'primary'" *ngIf="loggedIn$.getValue()">
+              You are logged in.
+            </alert>
+        </div>
+        <div class="row">
           <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3" *ngIf="isLogin">
             <div class="square square-7" id="square7"></div>
             <div class="square square-8" id="square8"></div>
@@ -28,9 +42,9 @@
                         <i class="tim-icons icon-single-02"> </i>
                       </div>
                     </div>
-                    <input
+                    <input #loginUser
                       class="form-control"
-                      placeholder="Username"
+                      placeholder="Username or e-mail"
                       type="text"
                       (focus)="focus = true"
                       (blur)="focus = false"
@@ -45,7 +59,7 @@
                         <i class="tim-icons icon-lock-circle"> </i>
                       </div>
                     </div>
-                    <input
+                    <input #loginPass
                       class="form-control"
                       placeholder="Password"
                       type="text"
@@ -58,7 +72,7 @@
               <div class="card-footer">
                 <a
                   class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
+                  (click)="login(loginUser.value, loginPass.value);"
                 >
                   Sign in
                 </a>
@@ -93,9 +107,9 @@
                         <i class="tim-icons icon-single-02"> </i>
                       </div>
                     </div>
-                    <input
+                    <input #regisUser
                       class="form-control"
-                      placeholder="Full Name"
+                      placeholder="Username"
                       type="text"
                       (focus)="focus = true"
                       (blur)="focus = false"
@@ -110,7 +124,7 @@
                         <i class="tim-icons icon-email-85"> </i>
                       </div>
                     </div>
-                    <input
+                    <input #regisEmail
                       class="form-control"
                       placeholder="Email"
                       type="text"
@@ -124,20 +138,37 @@
                   >
                     <div class="input-group-prepend">
                       <div class="input-group-text">
-                        <i class="tim-icons icon-lock-circle"> </i>
+                        <i class="tim-icons icon-email-85"> </i>
                       </div>
                     </div>
-                    <input
+                    <input #regisUrl
                       class="form-control"
-                      placeholder="Password"
+                      placeholder="URL: your website"
                       type="text"
                       (focus)="focus2 = true"
                       (blur)="focus2 = false"
                     />
                   </div>
+                  <div
+                    class="input-group"
+                    [ngClass]="{ 'input-group-focus': focus3 === true }"
+                  >
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-lock-circle"> </i>
+                      </div>
+                    </div>
+                    <input #regisPass
+                      class="form-control"
+                      placeholder="Password"
+                      type="text"
+                      (focus)="focus3 = true"
+                      (blur)="focus3 = false"
+                    />
+                  </div>
                   <div class="form-check text-left">
                     <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" />
+                      <input #terms class="form-check-input" type="checkbox" />
 
                       <span class="form-check-sign"> </span> I agree to the
                       <a href="javascript:void(0)"> terms and conditions </a> .
@@ -149,6 +180,7 @@
                 <a
                   class="btn btn-danger btn-round btn-lg"
                   href="javascript:void(0)"
+                  (click)="terms.value ?  register(regisUser.value, regisPass.value, regisEmail.value, regisUrl.value): alertTerms = true"
                 >
                   Get Started
                 </a>

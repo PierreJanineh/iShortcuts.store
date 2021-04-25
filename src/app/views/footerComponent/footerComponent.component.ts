@@ -1,6 +1,7 @@
 import {Component, OnInit, OnDestroy, Output, EventEmitter, HostListener} from '@angular/core';
-import {Account, Constants} from '../../pages/base-pages.component';
+import {Constants} from '../../pages/base-pages.component';
 import {Router} from '@angular/router';
+import {Account} from '../../models/account';
 
 @Component({
   selector: 'app-footer',

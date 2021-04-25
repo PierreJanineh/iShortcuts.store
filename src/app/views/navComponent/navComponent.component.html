@@ -112,14 +112,19 @@
             </a>
           </div>
         </li>
-        <li class="nav-item p-0" *ngIf="(!account.isLoggedIn())">
+        <li class="nav-item p-0" *ngIf="(!loggedIn)">
           <a class="nav-link btn btn-default d-none d-lg-block nav-btn" [routerLink]="['/register']">
             <i class="tim-icons icon-single-02"> </i> Login/Signup
           </a>
         </li>
-        <li class="nav-item p-0" *ngIf="(account.isLoggedIn())">
+        <li class="nav-item p-0" *ngIf="(loggedIn)">
           <a class="nav-link btn btn-default d-none d-lg-block nav-btn" [routerLink]="['/register']">
             <i class="tim-icons icon-upload"> </i> Upload Shortcut
+          </a>
+        </li>
+        <li class="nav-item p-0" *ngIf="(loggedIn)">
+          <a class="nav-link btn btn-default d-none d-lg-block" (click)="logout()">
+            <i class="tim-icons icon-button-power"></i> Logout
           </a>
         </li>
       </ul>
