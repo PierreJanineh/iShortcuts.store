@@ -12,7 +12,6 @@ export class Shortcut {
   icon: Glyphs;
   color: Colors;
   authorUsername: string;
-  authorUrl: string;
 
   constructor(name: string,
               description: string,
@@ -21,8 +20,7 @@ export class Shortcut {
               requiredApps: string[],
               icon: Glyphs,
               color: Colors,
-              authorUsername: string,
-              authorUrl: string) {
+              authorUsername: string) {
     this.id = /*Math.random()+"-"+*/name + '-' + categories + '-' + icloud + '-' + authorUsername;
     this.name = name;
     this.description = description;
@@ -32,7 +30,6 @@ export class Shortcut {
     this.icon = icon;
     this.color = color;
     this.authorUsername = authorUsername;
-    this.authorUrl = authorUrl;
   }
 
   public static getAllItems(): Shortcut[] {
@@ -45,8 +42,7 @@ export class Shortcut {
         null,
         Glyphs.Binoculars,
         Colors.DelftBlue,
-        'Pierre',
-        'blah'
+        'Pierre'
       ),
       new Shortcut(
         'hello shortcut2',
@@ -56,8 +52,7 @@ export class Shortcut {
         null,
         Glyphs.Aeroplane,
         Colors.Red,
-        'Pierre',
-        'blah'
+        'Pierre'
       ),
       new Shortcut(
         'hello shortcut3',
@@ -67,8 +62,7 @@ export class Shortcut {
         null,
         Glyphs.Motorcycle,
         Colors.Vermilion,
-        'Pierre',
-        'blah'
+        'Pierre'
       )
     ];
   }

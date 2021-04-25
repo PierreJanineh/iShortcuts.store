@@ -14,9 +14,6 @@
             <alert [type]="'primary'" *ngIf="passwordAlert$.getValue()">
               Login password is incorrect!
             </alert>
-            <alert [type]="'primary'" *ngIf="loggedIn$.getValue()">
-              You are logged in.
-            </alert>
         </div>
         <div class="row">
           <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3" *ngIf="isLogin">
@@ -99,7 +96,7 @@
               <div class="card-body">
                 <form class="form">
                   <div
-                    class="input-group"
+                    class="input-group form-group" id="group"
                     [ngClass]="{ 'input-group-focus': focus === true }"
                   >
                     <div class="input-group-prepend">
@@ -108,11 +105,11 @@
                       </div>
                     </div>
                     <input #regisUser
-                      class="form-control"
+                      class="form-control" id="control"
                       placeholder="Username"
                       type="text"
                       (focus)="focus = true"
-                      (blur)="focus = false"
+                      (blur)="focus = false; checkUsernameExists(regisUser.value)"
                     />
                   </div>
                   <div
@@ -143,7 +140,7 @@
                     </div>
                     <input #regisUrl
                       class="form-control"
-                      placeholder="URL: your website"
+                      placeholder="URL: http://yourwebsite.com"
                       type="text"
                       (focus)="focus2 = true"
                       (blur)="focus2 = false"

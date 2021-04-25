@@ -3,6 +3,7 @@ import {Constants} from '../../pages/base-pages.component';
 import {Account} from '../../models/account';
 import {Category} from '../../models/category';
 import {AppService} from '../../services/app.service';
+import {FirebaseService} from '../../services/firebase.service';
 
 @Component({
   selector: 'app-nav',
@@ -17,11 +18,17 @@ export class NavComponentComponent implements OnInit, OnDestroy {
 
   categories: string[] = Category.categories;
 
-  constructor(private service: AppService) {}
+  constructor(private service: AppService, private firebase: FirebaseService) {}
   ngOnInit(): void {
     Account.getInstance().loggedIn$.subscribe((bool) => {
       this.loggedIn = bool;
-    })
+    });
+    if (localStorage.getItem('currentUser')){
+      const username = localStorage.getItem('currentUser');
+      this.firebase.getUserByUsername(username).subscribe((user) => {
+        Account.getInstance().login(user);
+      });
+    }
   }
   ngOnDestroy(): void {}
 

@@ -34,20 +34,20 @@ export class FirebaseService {
     return this.usersRef;
   }
 
+  createUser(user: User): Promise<void> {
+    return this.usersCollection.doc(user.username).set(user);
+  }
+
+  updateUser(user: User): Promise<void> {
+    return this.usersCollection.doc(user.username).update(user);
+  }
+
+  deleteUser(username: string): Promise<void> {
+    return this.usersCollection.doc(username).delete();
+  }
+
   getAllShortcutsObservable(): Observable<Shortcut[]> {
     return this.shortcutsRef;
-  }
-
-  createUser(user: User): Promise<DocumentReference<User>> {
-    return this.usersCollection.add(user);
-  }
-
-  updateUser(key: string, user: User): Promise<void> {
-    return this.usersCollection.doc(key).update(user);
-  }
-
-  deleteUser(key: string): Promise<void> {
-    return this.usersCollection.doc(key).delete();
   }
 
   createShortcut(shortcut: Shortcut): any {

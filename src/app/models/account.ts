@@ -19,7 +19,18 @@ export class Account {
     return this.account;
   }
 
+  register(user: User){
+    this.login(user);
+  }
+
+  login(user: User){
+    localStorage.setItem("currentUser", user.username);
+    this.loggedIn$.next(true);
+    this.user = user;
+  }
+
   logout(){
+    localStorage.removeItem("currentUser");
     this.loggedIn$.next(false);
     this.user = null;
   }

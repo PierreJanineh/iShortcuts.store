@@ -19,6 +19,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
   usernameAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   passwordAlert$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   loggedIn$ = Account.getInstance().loggedIn$;
+  usernameExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   username: string;
   focus;
   focus1;
@@ -101,15 +102,55 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
     this.service.register(username, password, email, url, this.firebase);
   }
 
+  checkUsernameExists(username: string){
+    const group = document.getElementById("group");
+    const control = document.getElementById("control");
+
+    function danger() {
+      if (control.classList.contains('form-control-success')) {
+        control.classList.replace('form-control-success', 'form-control-danger');
+        group.classList.replace('has-success', 'has-danger');
+      } else if (!control.classList.contains('form-control-danger')) {
+        control.classList.add('form-control-danger');
+        group.classList.add('has-danger');
+      }
+    }
+
+    function success() {
+      if (control.classList.contains('form-control-danger')) {
+        control.classList.replace('form-control-danger', 'form-control-success');
+        group.classList.replace('has-danger', 'has-success');
+      } else if (!control.classList.contains('form-control-success')) {
+        control.classList.add('form-control-success');
+        group.classList.add('has-success');
+      }
+    }
+
+    if (username === " " || username === ""){
+      danger();
+      return;
+    }
+    this.service.checkUsernameExists(username, this.firebase, this.usernameExists$);
+
+    this.usernameExists$.subscribe((bool) => {
+      if (bool) {
+        danger();
+      } else {
+        success();
+      }
+    });
+  }
+
   ngOnInit() {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("register-page");
 
-    this.loggedIn$.subscribe((bool) => {
+    const subscription = this.loggedIn$.subscribe((bool) => {
       if (bool) {
         this.router.navigate(['/profile', this.username]);
+        subscription.unsubscribe();
       }
-    })
+    });
   }
   ngOnDestroy() {
     var body = document.getElementsByTagName("body")[0];

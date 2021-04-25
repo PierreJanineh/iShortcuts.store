@@ -443,7 +443,7 @@
 }
 
 .brand .h1-seo {
-  font-size: 5em;
+  font-size:8vw;
   font-weight: 300;
 }
 
@@ -521,7 +521,17 @@
   overflow: hidden;
   overflow-y: scroll;
 }
-
+.floating-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 9999;
+}
 .nav-btn {
   width: 30vh;
 }

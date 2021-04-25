@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Constants} from '../base-pages.component';
+import {FirebaseService} from '../../services/firebase.service';
 
 @Component({
   selector: 'app-index',
