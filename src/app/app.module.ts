@@ -38,8 +38,7 @@ import {RegisterPageComponent} from './pages/registerPage/registerPage.component
 import {AboutPageComponent} from './pages/aboutPage/aboutPage.component';
 import {MatInputModule} from '@angular/material/input';
 import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSpinner.component';
-
-import {FirebaseService} from './services/firebase.service';
+import {EditProfilePageComponent} from './pages/profilePage/editProfile.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +56,7 @@ import {FirebaseService} from './services/firebase.service';
     RegisterPageComponent,
     AboutPageComponent,
     LoadingSpinnerComponent,
+    EditProfilePageComponent,
   ],
   imports: [
     BrowserModule,

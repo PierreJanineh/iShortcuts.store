@@ -17,20 +17,6 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {JwBootstrapSwitchNg2Module} from 'jw-bootstrap-switch-ng2';
 import {PopoverModule} from 'ngx-bootstrap/popover';
 
-import {IndexComponent} from './index/index.component';
-import {ListPageComponent} from './listPage/listPage.component';
-import {ShortcutListItemComponent} from '../views/listItems/shortcutListItem.component';
-import {ShortcutPageComponent} from './shortcutPage/shortcutPage.component';
-import {NavComponentComponent} from '../views/navComponent/navComponent.component';
-import {FooterComponentComponent} from '../views/footerComponent/footerComponent.component';
-import {ProfilePageComponent} from './profilePage/profilePage.component';
-import {Page404Component} from './page404/page404.component';
-import {CategoriesPageComponent} from './categoriesPage/categoriesPage.component';
-import {CategoryListItemComponent} from '../views/listItems/categoryListItem.component';
-import {RegisterPageComponent} from './registerPage/registerPage.component';
-import {AboutPageComponent} from './aboutPage/aboutPage.component';
-import {LoadingSpinnerComponent} from '../views/loadingSpinnerComponent/loadingSpinner.component';
-
 @NgModule({
   imports: [
     CommonModule,

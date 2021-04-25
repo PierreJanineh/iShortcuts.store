@@ -35,11 +35,16 @@ export class FirebaseService {
   }
 
   createUser(user: User): Promise<void> {
-    return this.usersCollection.doc(user.username).set(user);
+    return this.usersCollection.ref.doc(user.username).set(Object.assign({}, user));
   }
 
   updateUser(user: User): Promise<void> {
-    return this.usersCollection.doc(user.username).update(user);
+    console.log(user.email);
+    return this.usersCollection.doc(user.username).update({
+      "url": user.url,
+      "password": user.password,
+      "email": user.email
+    });
   }
 
   deleteUser(username: string): Promise<void> {

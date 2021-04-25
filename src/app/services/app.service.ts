@@ -67,4 +67,9 @@ export class AppService {
   logout(){
     this.account.logout();
   }
+
+  updateAccountInfo(user: User, firebase: FirebaseService){
+    firebase.updateUser(user);
+    this.account.user = user;
+  }
 }

@@ -36,8 +36,4 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     const body = document.getElementsByTagName('body')[0];
     body.classList.remove('landing-page');
   }
-
-  print(s:string){
-    console.log(s);
-  }
 }

@@ -529,7 +529,6 @@
   height: 60px;
   border-radius: 50px;
   text-align: center;
-  box-shadow: 2px 2px 3px #999;
   z-index: 9999;
 }
 .nav-btn {
@@ -546,6 +545,10 @@
   position: fixed;
   top: 0;
   text-align: -webkit-center;
+}
+
+.edit-form{
+  width: 100%;
 }
 
 .loaderBox{

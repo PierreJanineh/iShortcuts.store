@@ -16,6 +16,7 @@ import { CategoryListItemComponent } from './views/listItems/categoryListItem.co
 import { RegisterPageComponent } from './pages/registerPage/registerPage.component';
 import { AboutPageComponent } from './pages/aboutPage/aboutPage.component';
 import { LoadingSpinnerComponent } from './views/loadingSpinnerComponent/loadingSpinner.component';
+import { EditProfilePageComponent } from './pages/profilePage/editProfile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'list/:category', component: ListPageComponent },
   { path: 'shortcut/:id', component: ShortcutPageComponent },
   { path: 'profile/:username', component: ProfilePageComponent },
+  { path: 'editProfile/:username', component: EditProfilePageComponent },
   { path: 'categories', component: CategoriesPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'about', component: AboutPageComponent },
@@ -41,7 +43,7 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes, {
       useHash: true,
-      // scrollPositionRestoration: 'enabled'
+      scrollPositionRestoration: 'enabled'
     })
   ],
   exports: []

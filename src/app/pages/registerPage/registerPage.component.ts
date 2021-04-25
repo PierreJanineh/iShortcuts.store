@@ -99,6 +99,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
 
   register(username: string, password: string, url:string, email: string){
     //registers and changes behaviours values.
+    this.username = username;
     this.service.register(username, password, email, url, this.firebase);
   }
 
