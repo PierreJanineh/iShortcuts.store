@@ -7,7 +7,7 @@
         <h1>Upload and share your shortcut:</h1>
         <div class="row">
           <alert [type]="'primary'" *ngIf="(pageError$ | async)">
-            Please fill all fields. All fields are required
+            All fields except "Required apps" are required!
           </alert>
         </div>
         <form class="form">
@@ -124,7 +124,7 @@
           <hr/>
           <div #parent class="row nav-align-center">
             <h4 class="col-12">Glyphs</h4>
-            <div class="form-check form-check-radio col-sm-3 col-lg-1" *ngFor="let g of glyphs; let isSelected = false">
+            <div class="form-check form-check-radio col-sm-3 col-lg-1" *ngFor="let g of glyphs">
               <label class="form-check-label">
                 <input #selectedItem (change)="selectGlyph(g, selectedItem, parent)"
                        class="form-check-input"

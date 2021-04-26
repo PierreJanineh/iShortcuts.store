@@ -105,11 +105,7 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
     });
 
     this.usernameExists$.subscribe(bool => {
-      if (bool){
-        this.service.danger(this.group, this.control);
-      } else {
-        this.service.success(this.group, this.control);
-      }
+      this.service.processErrors(this.group, this.control, bool);
     });
   }
 

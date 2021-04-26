@@ -4,7 +4,7 @@ import {Account} from '../../models/account';
 import {Category} from '../../models/category';
 import {AppService} from '../../services/app.service';
 import {FirebaseService} from '../../services/firebase.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -19,10 +19,11 @@ export class NavComponentComponent implements OnInit, OnDestroy {
   @Input() isInEditOrUpload = false;
   @Input() isInShortcut = false;
   @Output() shortcutSaveSelected = new EventEmitter<boolean>();
+  shortcutId: string;
 
   categories: string[] = Category.categories;
 
-  constructor(private service: AppService, private firebase: FirebaseService, private router: Router) {}
+  constructor(private service: AppService, private firebase: FirebaseService, private route: ActivatedRoute) {}
   ngOnInit(): void {
     Account.getInstance().loggedIn$.subscribe((bool) => {
       this.loggedIn = bool;
@@ -34,6 +35,9 @@ export class NavComponentComponent implements OnInit, OnDestroy {
         const password = localStorage.getItem('password');
         this.service.logInFromLocalStorage(username, password, this.firebase);
       }
+    }
+    if (this.isInShortcut){
+      this.shortcutId = this.route.snapshot.paramMap.get("id");
     }
   }
   ngOnDestroy(): void {}

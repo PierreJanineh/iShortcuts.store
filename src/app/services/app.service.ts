@@ -63,9 +63,17 @@ export class AppService {
   }
 
   createShortcut(shortcut: Shortcut, firebase: FirebaseService){
-    shortcut.name.toLowerCase();
-    shortcut.uniqueName.toLowerCase();
+    shortcut.uniqueName = shortcut.uniqueName.toLowerCase();
     firebase.createShortcut(shortcut);
+  }
+
+  editShortcut(shortcut: Shortcut, firebase: FirebaseService){
+    shortcut.uniqueName = shortcut.uniqueName.toLowerCase();
+    firebase.updateShortcut(shortcut.id, shortcut);
+  }
+
+  shortcutDownloaded(id: string, firebase: FirebaseService){
+    firebase.updateShortcutDownloaded(id);
   }
 
   checkUsernameExists(username: string, firebase: FirebaseService, usernameExists$: BehaviorSubject<boolean>){
@@ -150,6 +158,14 @@ export class AppService {
     } else if (!control.classList.contains('form-control-success')) {
       control.classList.add('form-control-success');
       group.classList.add('has-success');
+    }
+  }
+
+  processErrors(groupS: string, controlS: string, bool: boolean){
+    if (bool) {
+      this.danger(groupS, controlS);
+    } else {
+      this.success(groupS, controlS);
     }
   }
 

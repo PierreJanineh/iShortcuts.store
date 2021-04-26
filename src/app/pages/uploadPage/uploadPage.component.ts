@@ -117,6 +117,6 @@ export class UploadPageComponent implements OnInit, OnDestroy {
     }
     let short = new Shortcut(uniqueName, name, description, icloud, this.selectedCates, requiredApps.split(","), this.selectedGlyph, this.selectedColor, Account.getInstance().user.username);
     this.service.createShortcut(short, this.firebase);
-    this.router.navigate(['/success', short.id]);
+    this.router.navigate(['/shortcut', short.id]);
   }
 }

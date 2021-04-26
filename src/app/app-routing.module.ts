@@ -1,4 +1,4 @@
-import {EventEmitter, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
@@ -18,13 +18,14 @@ import { AboutPageComponent } from './pages/aboutPage/aboutPage.component';
 import { LoadingSpinnerComponent } from './views/loadingSpinnerComponent/loadingSpinner.component';
 import { EditProfilePageComponent } from './pages/profilePage/editProfile.component';
 import {UploadPageComponent} from './pages/uploadPage/uploadPage.component';
+import {EditShortcutPageComponent} from './pages/shortcutPage/editShortcutPage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: IndexComponent },
   { path: 'list/:category', component: ListPageComponent },
   { path: 'shortcut/:id', component: ShortcutPageComponent },
-  { path: 'editShortcut/:id', component: ShortcutPageComponent },
+  { path: 'editShortcut/:id', component: EditShortcutPageComponent },
   { path: 'profile/:username', component: ProfilePageComponent },
   { path: 'editProfile/:username', component: EditProfilePageComponent },
   { path: 'upload', component: UploadPageComponent },

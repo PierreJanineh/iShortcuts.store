@@ -40,6 +40,7 @@ import {MatInputModule} from '@angular/material/input';
 import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSpinner.component';
 import {EditProfilePageComponent} from './pages/profilePage/editProfile.component';
 import {UploadPageComponent} from './pages/uploadPage/uploadPage.component';
+import {EditShortcutPageComponent} from './pages/shortcutPage/editShortcutPage.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {UploadPageComponent} from './pages/uploadPage/uploadPage.component';
     LoadingSpinnerComponent,
     EditProfilePageComponent,
     UploadPageComponent,
+    EditShortcutPageComponent,
   ],
   imports: [
     BrowserModule,

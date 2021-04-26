@@ -9,7 +9,6 @@ export class Category {
 
   public static categories = [
     'Popular',
-    'New',
     'Books',
     'Business',
     'Developer Tools',

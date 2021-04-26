@@ -13,6 +13,7 @@ export class Shortcut {
   icon: string;
   color: string;
   authorUsername: string;
+  downloaded: number;
 
   constructor(uniqueName: string,
               name: string,

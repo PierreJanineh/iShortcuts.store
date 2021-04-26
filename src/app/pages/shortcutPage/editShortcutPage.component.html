@@ -1,0 +1,174 @@
+<app-nav [isInEditOrUpload]="true"
+         (shortcutSaveSelected)="saveShortcut(uniqueName.value, shortName.value, description.value, icloud.value, requiredApps.value)"></app-nav>
+<div class="wrapper">
+  <div class="section">
+    <div class="content">
+      <div class="container">
+        <h1>Edit your shortcut:</h1>
+        <div class="row">
+          <alert [type]="'primary'" *ngIf="(pageError$ | async)">
+            All fields except "Required apps" are required!
+          </alert>
+        </div>
+        <form class="form">
+          <label [htmlFor]="shortName">Shortcut name</label>
+          <div
+            class="input-group form-group" id="group"
+            [ngClass]="{ 'input-group-focus': focus === true }"
+          >
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tim-icons icon-single-02" tooltip="Use any name you want. Only letters (A-Z) and numbers are allowed."> </i>
+              </div>
+            </div>
+            <input #shortName
+                   class="form-control" id="control"
+                   placeholder="ex: Walk to coffee shop"
+                   type="text"
+                   [value]="(shortcut | async)?.name"
+                   (focus)="focus = true"
+                   (blur)="focus = false"
+                   (keyup)="checkStringExists(shortName.value, 0)"
+            />
+          </div>
+          <label [htmlFor]="uniqueName">Unique name</label>
+          <div
+            class="input-group form-group" id="group1"
+            [ngClass]="{ 'input-group-focus': focus1 === true }"
+          >
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tim-icons icon-single-02"
+                   tooltip="Represented as @coffeewalk, only letters (A-Z) and numbers are allowed. Spaces aren't allowed.">
+                </i>
+              </div>
+            </div>
+            <input #uniqueName
+                   class="form-control" id="control1"
+                   placeholder="ex: coffeewalk"
+                   type="text"
+                   [value]="(shortcut | async)?.uniqueName"
+                   (focus)="focus1 = true"
+                   (blur)="focus1 = false"
+                   (keyup)="checkStringExists(uniqueName.value, 1)"
+            />
+          </div>
+          <label [htmlFor]="description">Description</label>
+          <div
+            class="input-group"
+            [ngClass]="{ 'input-group-focus': focus2 === true }"
+          >
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tim-icons icon-email-85"> </i>
+              </div>
+            </div>
+            <input #description
+                   class="form-control"
+                   placeholder="ex: This shortcut says hello"
+                   type="text"
+                   [value]="(shortcut | async)?.description"
+                   (focus)="focus2 = true"
+                   (blur)="focus2 = false"
+                   tooltip="Describe your shortcut"
+            />
+          </div>
+          <label [htmlFor]="icloud">iCloud URL</label>
+          <div
+            class="input-group" id="group2"
+            [ngClass]="{ 'input-group-focus': focus3 === true }"
+          >
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tim-icons icon-email-85"> </i>
+              </div>
+            </div>
+            <input #icloud
+                   class="form-control" id="control2"
+                   placeholder="ex: https://www.icloud.com/shortcuts/..."
+                   type="url"
+                   [value]="(shortcut | async)?.icloud"
+                   (focus)="focus3 = true"
+                   (blur)="focus3 = false; checkStringExists(icloud.value, 2)"
+                   tooltip="Copy & Paste your shortcut's icloud link"
+            />
+          </div>
+          <label [htmlFor]="requiredApps">Required Apps</label>
+          <div
+            class="input-group"
+            [ngClass]="{ 'input-group-focus': focus3 === true }"
+          >
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <i class="tim-icons icon-lock-circle"> </i>
+              </div>
+            </div>
+            <input #requiredApps
+                   class="form-control"
+                   placeholder="ex: Home,Google Home"
+                   type="text"
+                   [value]="(shortcut | async)?.requiredApps"
+                   (focus)="focus3 = true"
+                   (blur)="focus3 = false"
+                   tooltip="Is there any required apps for this shortcut to work? type in all required apps separated by a comma."
+            />
+          </div>
+          <div class="row d-flex nav-align-center" id="checkRadios">
+            <h4 class="col-12">Categories</h4>
+            <div class="form-check col-sm-6 col-lg-4" *ngFor="let category of categories;">
+              <label class="form-check-label" >
+                <input #input [checked]="isSelected(category)"
+                       (change)="input.checked? addCategory(category): removeCategory(category)"
+                       class="form-check-input"
+                       type="checkbox">
+                <span class="form-check-sign"></span>
+                {{category}}
+              </label>
+            </div>
+          </div>
+          <hr/>
+          <div #parent
+               id="glyph-parent"
+               class="row nav-align-center">
+            <h4 class="col-12">Glyphs</h4>
+            <div class="form-check form-check-radio col-sm-3 col-lg-1" *ngFor="let g of glyphs">
+              <label class="form-check-label">
+                <input (change)="selectGlyph(g, parent)"
+                       class="form-check-input"
+                       name="{{g}}"
+                       type="radio"/>
+                <span class="form-check-sign"></span>
+                <i [ngClass]="g"> </i>
+              </label>
+            </div>
+          </div>
+          <hr/>
+
+          <div class="nav-item dropdown"
+               [ngStyle]="{'background': selectedColor != null ? selectedColor: null}"
+               dropdown>
+            <a aria-expanded="false"
+               aria-haspopup="true"
+               class="nav-link dropdown-toggle dropdown-toggle"
+               data-toggle="dropdown"
+               dropdownToggle
+               href="javascript:void(0)"
+               id="navbarDropdownMenuLink">
+              <h4>Color</h4>
+            </a>
+            <div aria-labelledby="navbarDropdownMenuLink"
+                 class="dropdown-menu"
+                 *dropdownMenu>
+              <div class="dropdown-item colors"
+                   *ngFor="let c of colors"
+                   (click)="selectColor(c)"
+                   [attr.style]="'background: '+c">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

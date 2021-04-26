@@ -63,6 +63,16 @@ export class FirebaseService {
     return this.shortcutsCollection.doc(shortcut.id).set(Object.assign({}, shortcut));
   }
 
+  updateShortcutDownloaded(id: string){
+    const sub = this.shortcutsCollection.doc(id).valueChanges().subscribe((shortcut) => {
+      console.log("id: "+id);
+      this.shortcutsCollection.doc(id).update({
+        "downloaded": shortcut.downloaded+1
+      });
+      sub.unsubscribe();
+    });
+  }
+
   updateShortcut(key: string, shortcut: Shortcut): Promise<void> {
     return this.shortcutsCollection.doc(key).update({
       "name": shortcut.name,

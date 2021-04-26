@@ -86,7 +86,7 @@
           </a>
         </li>
         <li class="nav-item" *ngIf="(loggedIn && isInShortcut)">
-          <a class="nav-link btn btn-default d-block d-lg-block" [routerLink]="['/upload']">
+          <a class="nav-link btn btn-default d-block d-lg-block" [routerLink]="['/editShortcut', shortcutId]">
             <i class="tim-icons icon-pencil"> </i> Edit Shortcut
           </a>
         </li>

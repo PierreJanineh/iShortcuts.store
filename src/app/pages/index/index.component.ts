@@ -12,7 +12,6 @@ export class IndexComponent implements OnInit, OnDestroy {
   store = Constants.store;
 
   popularCate = "Popular";
-  newCate = "New";
 
   constructor() {}
 
