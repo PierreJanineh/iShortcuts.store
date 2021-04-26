@@ -25,6 +25,8 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
   focus1;
   focus2;
   focus3;
+  private control = "control";
+  private group = "group";
 
   constructor(private firebase: FirebaseService, private service: AppService, private router: Router) { }
   @HostListener("document:mousemove", ["$event"])
@@ -91,6 +93,35 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
       "deg)";
   }
 
+  ngOnInit() {
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.add("register-page");
+
+    const subscription = this.loggedIn$.subscribe((bool) => {
+      if (bool) {
+        this.router.navigate(['/profile', this.username]);
+        subscription.unsubscribe();
+      }
+    });
+
+    this.usernameExists$.subscribe(bool => {
+      if (bool){
+        this.service.danger(this.group, this.control);
+      } else {
+        this.service.success(this.group, this.control);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    var body = document.getElementsByTagName("body")[0];
+    body.classList.remove("register-page");
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.onMouseMove(window.event);
+  }
+
   login(username: string, password: string){
     //logs in and changes behaviours values.
     this.username = username;
@@ -103,61 +134,14 @@ export class RegisterPageComponent implements OnInit, OnDestroy, OnChanges {
     this.service.register(username, password, email, url, this.firebase);
   }
 
-  checkUsernameExists(username: string){
-    const group = document.getElementById("group");
-    const control = document.getElementById("control");
-
-    function danger() {
-      if (control.classList.contains('form-control-success')) {
-        control.classList.replace('form-control-success', 'form-control-danger');
-        group.classList.replace('has-success', 'has-danger');
-      } else if (!control.classList.contains('form-control-danger')) {
-        control.classList.add('form-control-danger');
-        group.classList.add('has-danger');
-      }
-    }
-
-    function success() {
-      if (control.classList.contains('form-control-danger')) {
-        control.classList.replace('form-control-danger', 'form-control-success');
-        group.classList.replace('has-danger', 'has-success');
-      } else if (!control.classList.contains('form-control-success')) {
-        control.classList.add('form-control-success');
-        group.classList.add('has-success');
-      }
-    }
+  checkStringExists(username: string, i: number){
 
     if (username === " " || username === ""){
-      danger();
+      this.service.danger( i===0? "group": "group"+i, i===0? "control": "control"+i);
       return;
+    }else if ( i === 0 ){
+      this.service.checkUsernameExists(username, this.firebase, this.usernameExists$);
     }
-    this.service.checkUsernameExists(username, this.firebase, this.usernameExists$);
-
-    this.usernameExists$.subscribe((bool) => {
-      if (bool) {
-        danger();
-      } else {
-        success();
-      }
-    });
   }
 
-  ngOnInit() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.add("register-page");
-
-    const subscription = this.loggedIn$.subscribe((bool) => {
-      if (bool) {
-        this.router.navigate(['/profile', this.username]);
-        subscription.unsubscribe();
-      }
-    });
-  }
-  ngOnDestroy() {
-    var body = document.getElementsByTagName("body")[0];
-    body.classList.remove("register-page");
-  }
-  ngOnChanges(changes: SimpleChanges) {
-    this.onMouseMove(window.event);
-  }
 }

@@ -84,7 +84,7 @@ export class FirebaseService {
     this.getAllShortcutsObservable().subscribe(items => {
       const shorts: Shortcut[] = [];
       for (const item of items){
-        if (item.authorUsername === username){
+        if (item.authorUsername.includes(username)){
           shorts[shorts.length] = item;
         }
       }

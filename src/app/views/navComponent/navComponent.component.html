@@ -58,7 +58,7 @@
             dropdownToggle
             href="javascript:void(0)"
           >
-            <i class="fa fa-cogs d-lg-none d-xl-none"> </i> Categories
+            Categories
           </a>
           <div class="dropdown-menu dropdown-with-icons" *dropdownMenu>
             <a
@@ -66,22 +66,32 @@
               *ngFor="let category of categories"
               [routerLink]="['/list', category]"
             >
-              <i class="tim-icons icon-paper"> </i> {{category}}
+              {{category}}
             </a>
           </div>
         </li>
-        <li class="nav-item p-0" *ngIf="(!loggedIn)">
-          <a class="nav-link btn btn-default d-none d-lg-block nav-btn" [routerLink]="['/register']">
+        <li class="nav-item" *ngIf="(!loggedIn)">
+          <a class="nav-link btn btn-default d-block d-lg-block nav-btn" [routerLink]="['/register']">
             <i class="tim-icons icon-single-02"> </i> Login/Signup
           </a>
         </li>
-        <li class="nav-item p-0" *ngIf="(loggedIn)">
-          <a class="nav-link btn btn-default d-none d-lg-block nav-btn" [routerLink]="['/register']">
+        <li class="nav-item" *ngIf="(loggedIn && !isInEditOrUpload)">
+          <a class="nav-link btn btn-default d-block d-lg-block nav-btn" [routerLink]="['/upload']">
             <i class="tim-icons icon-upload"> </i> Upload Shortcut
           </a>
         </li>
+        <li class="nav-item" *ngIf="(loggedIn && isInEditOrUpload)">
+          <a class="nav-link btn btn-default d-block d-lg-block nav-btn" (click)="this.shortcutSaveSelected.emit(true)">
+            <i class="tim-icons icon-check-2"> </i> Save Shortcut
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="(loggedIn && isInShortcut)">
+          <a class="nav-link btn btn-default d-block d-lg-block" [routerLink]="['/upload']">
+            <i class="tim-icons icon-pencil"> </i> Edit Shortcut
+          </a>
+        </li>
         <li class="nav-item p-0" *ngIf="(loggedIn)">
-          <a class="nav-link btn btn-default d-none d-lg-block" (click)="logout()">
+          <a class="nav-link btn btn-default d-block d-lg-block" (click)="logout()">
             <i class="tim-icons icon-button-power"></i> Logout
           </a>
         </li>

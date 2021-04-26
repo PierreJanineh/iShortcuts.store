@@ -25,6 +25,7 @@ export class Account {
 
   login(user: User){
     localStorage.setItem("currentUser", user.username);
+    localStorage.setItem("password", user.password);
     this.loggedIn$.next(true);
     this.user = user;
   }

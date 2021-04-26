@@ -17,14 +17,18 @@ import { RegisterPageComponent } from './pages/registerPage/registerPage.compone
 import { AboutPageComponent } from './pages/aboutPage/aboutPage.component';
 import { LoadingSpinnerComponent } from './views/loadingSpinnerComponent/loadingSpinner.component';
 import { EditProfilePageComponent } from './pages/profilePage/editProfile.component';
+import {UploadPageComponent} from './pages/uploadPage/uploadPage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: IndexComponent },
   { path: 'list/:category', component: ListPageComponent },
   { path: 'shortcut/:id', component: ShortcutPageComponent },
+  { path: 'editShortcut/:id', component: ShortcutPageComponent },
   { path: 'profile/:username', component: ProfilePageComponent },
   { path: 'editProfile/:username', component: EditProfilePageComponent },
+  { path: 'upload', component: UploadPageComponent },
+  // { path: 'success', component: SuccessPageComponent },
   { path: 'categories', component: CategoriesPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'about', component: AboutPageComponent },

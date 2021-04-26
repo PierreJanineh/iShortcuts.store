@@ -31,6 +31,7 @@
              class="col-lg-4 col-md-5"
              *ngIf="(items$ | async).length > 0"
         >
+          <h1>My shortcuts</h1>
           <ul class="list-group">
             <li class="list-group-item text-black-50" *ngFor="let shortcut of (items$ | async)">
               <a class="nav-link" [routerLink]="['/shortcut', shortcut.id]">{{shortcut.name}}</a>

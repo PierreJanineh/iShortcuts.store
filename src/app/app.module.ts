@@ -39,6 +39,7 @@ import {AboutPageComponent} from './pages/aboutPage/aboutPage.component';
 import {MatInputModule} from '@angular/material/input';
 import {LoadingSpinnerComponent} from './views/loadingSpinnerComponent/loadingSpinner.component';
 import {EditProfilePageComponent} from './pages/profilePage/editProfile.component';
+import {UploadPageComponent} from './pages/uploadPage/uploadPage.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {EditProfilePageComponent} from './pages/profilePage/editProfile.componen
     AboutPageComponent,
     LoadingSpinnerComponent,
     EditProfilePageComponent,
+    UploadPageComponent,
   ],
   imports: [
     BrowserModule,

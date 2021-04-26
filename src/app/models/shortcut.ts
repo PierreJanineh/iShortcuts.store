@@ -4,24 +4,27 @@ import {Category} from './category';
 
 export class Shortcut {
   id: string;
+  uniqueName: string;
   name: string;
   description: string;
   icloud: string;
   categories: string[];
   requiredApps: string[];
-  icon: Glyphs;
-  color: Colors;
+  icon: string;
+  color: string;
   authorUsername: string;
 
-  constructor(name: string,
+  constructor(uniqueName: string,
+              name: string,
               description: string,
               icloud: string,
               categories: string[],
               requiredApps: string[],
-              icon: Glyphs,
-              color: Colors,
+              icon: string,
+              color: string,
               authorUsername: string) {
     this.id = Math.random() + "-" + name + '-' + categories + '-' + authorUsername;
+    this.uniqueName = uniqueName;
     this.name = name;
     this.description = description;
     this.icloud = icloud;

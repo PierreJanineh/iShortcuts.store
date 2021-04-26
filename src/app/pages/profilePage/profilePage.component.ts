@@ -15,8 +15,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   user: Observable<User>;
   items$: BehaviorSubject<Shortcut[]> = new BehaviorSubject<Shortcut[]>([]);
   isCollapsed = true;
-  constructor(private route: ActivatedRoute, private router: Router, private firebase: FirebaseService) {
-  }
+  constructor(private route: ActivatedRoute, private router: Router, private firebase: FirebaseService) {}
 
   ngOnInit() {
     const body = document.getElementsByTagName('body')[0];

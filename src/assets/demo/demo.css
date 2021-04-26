@@ -531,8 +531,20 @@
   text-align: center;
   z-index: 9999;
 }
-.nav-btn {
-  width: 30vh;
+
+@media screen and (min-width: 992px) {
+  .nav-btn {
+    width: 30vh;
+  }
+}
+
+.form label {
+  color: white;
+}
+
+.colors{
+  height: 5em;
+  margin:10px;
 }
 
 /*Loading Spinner*/

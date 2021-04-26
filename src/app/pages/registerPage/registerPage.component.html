@@ -109,7 +109,7 @@
                       placeholder="Username"
                       type="text"
                       (focus)="focus = true"
-                      (blur)="focus = false; checkUsernameExists(regisUser.value)"
+                      (blur)="focus = false; checkStringExists(regisUser.value,0)"
                     />
                   </div>
                   <div
