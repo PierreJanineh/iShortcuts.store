@@ -18,8 +18,10 @@ export class NavComponentComponent implements OnInit, OnDestroy {
   loggedIn: boolean;
   @Input() isInEditOrUpload = false;
   @Input() isInShortcut = false;
+  @Input() isInProfile = false;
   @Output() shortcutSaveSelected = new EventEmitter<boolean>();
   shortcutId: string;
+  account = Account.getInstance();
 
   categories: string[] = Category.categories;
 

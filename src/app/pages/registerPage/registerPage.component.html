@@ -168,7 +168,7 @@
                       <input #terms class="form-check-input" type="checkbox" />
 
                       <span class="form-check-sign"> </span> I agree to the
-                      <a href="javascript:void(0)"> terms and conditions </a> .
+                      <a [routerLink]="['/termsAndConditions']" > terms and conditions </a> .
                     </label>
                   </div>
                 </form>
@@ -176,7 +176,6 @@
               <div class="card-footer">
                 <a
                   class="btn btn-danger btn-round btn-lg"
-                  href="javascript:void(0)"
                   (click)="terms.value ?  register(regisUser.value, regisPass.value, regisEmail.value, regisUrl.value): alertTerms = true"
                 >
                   Get Started

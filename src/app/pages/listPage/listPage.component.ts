@@ -37,6 +37,9 @@ export class ListPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(
       params => {
         let cate: string = params['category'];
+        if (cate === "Popular"){
+          //get all shortcuts from firestore and check downloads and add popular category for evey one
+        }
         //Check if the path is a category or a search query (search queries start with '$').
         if (cate.charAt(0) != "$"){
           this.category = new Category(cate);

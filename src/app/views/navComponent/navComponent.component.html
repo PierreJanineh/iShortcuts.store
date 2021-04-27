@@ -75,6 +75,16 @@
             <i class="tim-icons icon-single-02"> </i> Login/Signup
           </a>
         </li>
+        <li class="nav-item p-0" *ngIf="(loggedIn)">
+          <a class="nav-link btn btn-default d-block d-lg-block" (click)="logout()">
+            <i class="tim-icons icon-button-power"></i> Logout
+          </a>
+        </li>
+        <li class="nav-item p-0" *ngIf="(loggedIn && !isInProfile)">
+          <a class="nav-link btn btn-default d-block d-lg-block" [routerLink]="['/profile', account == null? null : account.user.username]">
+            <i class="tim-icons icon-button-power"></i> Profile
+          </a>
+        </li>
         <li class="nav-item" *ngIf="(loggedIn && !isInEditOrUpload)">
           <a class="nav-link btn btn-default d-block d-lg-block nav-btn" [routerLink]="['/upload']">
             <i class="tim-icons icon-upload"> </i> Upload Shortcut
@@ -85,14 +95,9 @@
             <i class="tim-icons icon-check-2"> </i> Save Shortcut
           </a>
         </li>
-        <li class="nav-item" *ngIf="(loggedIn && isInShortcut)">
+        <li class="nav-item" *ngIf="(loggedIn && isInShortcut && !isInEditOrUpload)">
           <a class="nav-link btn btn-default d-block d-lg-block" [routerLink]="['/editShortcut', shortcutId]">
             <i class="tim-icons icon-pencil"> </i> Edit Shortcut
-          </a>
-        </li>
-        <li class="nav-item p-0" *ngIf="(loggedIn)">
-          <a class="nav-link btn btn-default d-block d-lg-block" (click)="logout()">
-            <i class="tim-icons icon-button-power"></i> Logout
           </a>
         </li>
       </ul>
