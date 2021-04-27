@@ -1,6 +1,3 @@
-import {Shortcut} from './shortcut';
-import {FirebaseService} from '../services/firebase.service';
-
 export class User {
   username: string;
   password: string;

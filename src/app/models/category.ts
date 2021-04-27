@@ -8,6 +8,7 @@ export class Category {
   items: Shortcut[];
 
   public static categories = [
+    'All',
     'Popular',
     'Books',
     'Business',
@@ -47,10 +48,14 @@ export class Category {
   }
 
   getAllItemsForCategoryFromAllItems(category: string, shortcuts: Shortcut[]){
+    if (category === "All"){
+      this.items = shortcuts;
+      return;
+    }
     for (const short of shortcuts) {
       for (const cate of short.categories){
         if (cate === category) {
-          this.items[0] = short;
+          this.items[this.items.length] = short;
           return;
         }
       }

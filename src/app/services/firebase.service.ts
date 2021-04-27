@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import {User} from '../models/user';
 import {Shortcut} from '../models/shortcut';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentReference} from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Account} from '../models/account';
 
@@ -10,20 +13,20 @@ import {Account} from '../models/account';
 })
 export class FirebaseService {
 
-  private usersPath = 'users';
-  private shortcutsPath = 'shortcuts';
+  private USERS_PATH = 'users';
+  private SHORTCUTS_PATH = 'shortcuts';
 
   usersCollection: AngularFirestoreCollection<User> = null;
   shortcutsCollection: AngularFirestoreCollection<Shortcut> = null;
-  usersRef: Observable<User[]> = null;
-  shortcutsRef: Observable<Shortcut[]> = null;
-  accout: Account = Account.getInstance();
+  usersList: Observable<User[]> = null;
+  shortcutsList: Observable<Shortcut[]> = null;
+  account: Account = Account.getInstance();
 
   constructor(private db: AngularFirestore) {
-    this.usersCollection = db.collection<User>(this.usersPath);
-    this.usersRef = this.usersCollection.valueChanges();
-    this.shortcutsCollection = db.collection<Shortcut>(this.shortcutsPath);
-    this.shortcutsRef = this.shortcutsCollection.valueChanges();
+    this.usersCollection = db.collection<User>(this.USERS_PATH);
+    this.usersList = this.usersCollection.valueChanges();
+    this.shortcutsCollection = db.collection<Shortcut>(this.SHORTCUTS_PATH);
+    this.shortcutsList = this.shortcutsCollection.valueChanges();
   }
 
   getUserByUsername(username: string): Observable<User> {
@@ -31,7 +34,7 @@ export class FirebaseService {
   }
 
   getAllUsersObservable(): Observable<User[]> {
-    return this.usersRef;
+    return this.usersList;
   }
 
   createUser(user: User): Promise<void> {
@@ -56,7 +59,7 @@ export class FirebaseService {
   }
 
   getAllShortcutsObservable(): Observable<Shortcut[]> {
-    return this.shortcutsRef;
+    return this.shortcutsList;
   }
 
   createShortcut(shortcut: Shortcut): any {
@@ -91,7 +94,7 @@ export class FirebaseService {
   }
 
   public getShortcutsForAuthor(username: string, items$: BehaviorSubject<Shortcut[]>) {
-    this.getAllShortcutsObservable().subscribe(items => {
+    const sub = this.getAllShortcutsObservable().subscribe(items => {
       const shorts: Shortcut[] = [];
       for (const item of items){
         if (item.authorUsername.includes(username)){
@@ -99,6 +102,7 @@ export class FirebaseService {
         }
       }
       items$.next(shorts);
+      sub.unsubscribe();
     })
   }
 }

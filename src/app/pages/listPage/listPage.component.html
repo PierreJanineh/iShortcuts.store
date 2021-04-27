@@ -12,7 +12,7 @@
             {{isSearch? 'Search results for: ' + search: category.name}} <br/>
             <span class="text-info"
                   *ngIf="itemsCount$ | async">
-              Items count: {{isSearch? searchItems: category.items.length}}
+              Items count: {{isSearch? (searchItems$ | async).length: category.items.length}}
             </span>
             <span class="text-info"
                   *ngIf="searchAlert$ | async">

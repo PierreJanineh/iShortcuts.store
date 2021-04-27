@@ -18,25 +18,29 @@ export class AppService {
   logIn(username: string, password: string, firebase: FirebaseService, usernameAlert$: BehaviorSubject<boolean>, passwordAlert$: BehaviorSubject<boolean>) {
     username = username.toLowerCase();
     console.log(username);
-    firebase.getUserByUsername(username).subscribe((user) => {
+    const sub = firebase.getUserByUsername(username).subscribe((user) => {
       if (user != null){
         if (user.password === password){
           usernameAlert$.next(false);
           passwordAlert$.next(false);
           this.account.login(user);
+          sub.unsubscribe();
           return true;
         }
         usernameAlert$.next(false);
         passwordAlert$.next(true);
         this.account.loggedIn$.next(false);
+        sub.unsubscribe();
         return false;
       } else {
-        firebase.getAllUsersObservable().subscribe((users) => {
+        const subr = firebase.getAllUsersObservable().subscribe((users) => {
+          subr.unsubscribe();
           for (const usr of users) {
             if (usr.email === username /*as email*/ && usr.password === password) {
               usernameAlert$.next(false);
               passwordAlert$.next(false);
               this.account.login(usr);
+              sub.unsubscribe();
               return true;
             }
             passwordAlert$.next(true);
@@ -45,13 +49,15 @@ export class AppService {
         });
       }
       this.account.loggedIn$.next(false);
+      sub.unsubscribe();
       return false; //true for successful
     });
   }
 
   logInFromLocalStorage(username: string, password: string, firebase: FirebaseService){
-    firebase.getUserByUsername(username).subscribe((user) => {
+    const sub = firebase.getUserByUsername(username).subscribe((user) => {
       this.account.login(user);
+      sub.unsubscribe();
     });
   }
 
@@ -76,9 +82,59 @@ export class AppService {
     firebase.updateShortcutDownloaded(id);
   }
 
+  makeShortcutsPopular(firebase: FirebaseService, numberOfDownloads: number){
+    const sub = firebase.getAllShortcutsObservable().subscribe((shorts) => {
+      for (const short of shorts){
+        if (short.downloaded > numberOfDownloads && !short.categories.includes("Popular")){
+          short.categories[short.categories.length] = "Popular";
+          firebase.updateShortcut(short.id, short);
+        }
+      }
+      sub.unsubscribe();
+    });
+  }
+
+  downgradePopularShortcutsWith(numberOfDownloads: number, firebase: FirebaseService){
+    const sub = firebase.getAllShortcutsObservable().subscribe((shorts) => {
+      for (const short of shorts){
+        if (short.categories.includes("Popular") && short.downloaded < numberOfDownloads){
+          short.categories.splice(short.categories.indexOf("Popular"));
+          firebase.updateShortcut(short.id, short);
+        }
+      }
+      sub.unsubscribe();
+    });
+  }
+
+  getSearchResults(words: string, firebase: FirebaseService, searchIsComplete$: BehaviorSubject<boolean>, searchItems$: BehaviorSubject<Shortcut[]>) {
+    const sub = firebase.getAllShortcutsObservable().subscribe((shorts) => {
+      const shortcuts: Shortcut[] = [];
+      for (const short of shorts){
+        if (words.split(" ").length > 0){
+          for (const word of words.split(" ")){
+            searchForWord(word);
+          }
+        }else {
+          searchForWord(words);
+        }
+
+        function searchForWord(word: string) {
+          if (short.uniqueName.includes(word)){
+            shortcuts[shortcuts.length] = short;
+          }else if (short.id.includes(word)){
+            shortcuts[shortcuts.length] = short;
+          }
+        }
+      }
+      searchItems$.next(shortcuts);
+      searchIsComplete$.next(true);
+      sub.unsubscribe();
+    });
+  }
+
   checkUsernameExists(username: string, firebase: FirebaseService, usernameExists$: BehaviorSubject<boolean>){
     username = username.toLowerCase();
-    firebase.getAllUsersObservable().subscribe((users) => {
+    const sub = firebase.getAllUsersObservable().subscribe((users) => {
       for (const user of users){
         let reg = new RegExp('^[\\dA-Za-z]*$');
         if (!reg.test(username)){
@@ -86,6 +142,7 @@ export class AppService {
         } else {
           usernameExists$.next(true);
         }
+        sub.unsubscribe();
       }
     });
   }
@@ -102,18 +159,20 @@ export class AppService {
   }
 
   checkShortcutUniqueNameExists(uniqueName: string, firebase: FirebaseService, shortcutUniqueNameExists$: BehaviorSubject<boolean>){
-    uniqueName = uniqueName.toLowerCase();let reg = new RegExp('^[\\dA-Za-z]*$');
+    uniqueName = uniqueName.toLowerCase();
+    let reg = new RegExp('^[\\dA-Za-z]*$');
     if (!reg.test(uniqueName)){
       shortcutUniqueNameExists$.next(true);
       return;
     }
-    firebase.getAllShortcutsObservable().subscribe((shortcuts) => {
+    const sub = firebase.getAllShortcutsObservable().subscribe((shortcuts) => {
       for (const short of shortcuts){
         if (short.uniqueName === uniqueName){
           shortcutUniqueNameExists$.next(true);
         }else {
           shortcutUniqueNameExists$.next(false);
         }
+        sub.unsubscribe();
       }
     });
   }

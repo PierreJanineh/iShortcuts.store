@@ -1,7 +1,3 @@
-import {Glyphs} from './glyphs';
-import {Colors} from './colors';
-import {Category} from './category';
-
 export class Shortcut {
   id: string;
   uniqueName: string;
