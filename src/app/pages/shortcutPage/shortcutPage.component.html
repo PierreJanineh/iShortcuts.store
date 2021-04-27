@@ -22,8 +22,7 @@
                         {{(item | async)?.name}} <br/>
                         <h5>
                             by
-<!--                            TODO add id for profile-->
-                            <a [routerLink]= "['/profile']">
+                            <a [routerLink]= "['/profile', (item | async)?.authorUsername]">
                                 {{(item | async)?.authorUsername}}
                             </a>
                         </h5>

@@ -94,15 +94,8 @@ export class FirebaseService {
   }
 
   public getShortcutsForAuthor(username: string, items$: BehaviorSubject<Shortcut[]>) {
-    const sub = this.getAllShortcutsObservable().subscribe(items => {
-      const shorts: Shortcut[] = [];
-      for (const item of items){
-        if (item.authorUsername.includes(username)){
-          shorts[shorts.length] = item;
-        }
-      }
+    this.db.collection<Shortcut>(this.SHORTCUTS_PATH, ref => ref.where("authorUsername", "==", username)).valueChanges().subscribe((shorts) => {
       items$.next(shorts);
-      sub.unsubscribe();
-    })
+    });
   }
 }

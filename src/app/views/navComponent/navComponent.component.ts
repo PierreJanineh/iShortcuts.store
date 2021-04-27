@@ -21,6 +21,7 @@ export class NavComponentComponent implements OnInit, OnDestroy {
   @Input() isInProfile = false;
   @Output() shortcutSaveSelected = new EventEmitter<boolean>();
   shortcutId: string;
+  myOwn: boolean;
   account = Account.getInstance();
 
   categories: string[] = Category.categories;
@@ -40,6 +41,7 @@ export class NavComponentComponent implements OnInit, OnDestroy {
     }
     if (this.isInShortcut){
       this.shortcutId = this.route.snapshot.paramMap.get("id");
+      this.myOwn = this.account.checkIfShortcutIsMine(this.shortcutId);
     }
   }
   ngOnDestroy(): void {}

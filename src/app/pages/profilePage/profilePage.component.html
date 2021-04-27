@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <button class="btn-primary floating-btn" [routerLink]="['/editProfile', (user | async)?.username]"><i class="tim-icons icon-pencil"></i></button>
+    <button *ngIf="myOwn" class="btn-primary floating-btn" [routerLink]="['/editProfile', (user | async)?.username]"><i class="tim-icons icon-pencil"></i></button>
   </div>
   <app-footer></app-footer>
 </div>

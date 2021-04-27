@@ -35,4 +35,14 @@ export class Account {
     this.loggedIn$.next(false);
     this.user = null;
   }
+
+  checkIfUsernameIsMyOwn(username: string): boolean{
+    return this.user.username === username;
+  }
+
+  checkIfShortcutIsMine(shortcutId: string): boolean{
+    const segments = shortcutId.split("-");
+    return this.user.username === segments[segments.length-1];
+  }
+
 }

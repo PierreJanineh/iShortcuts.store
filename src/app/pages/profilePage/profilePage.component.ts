@@ -15,6 +15,8 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   user: Observable<User>;
   items$: BehaviorSubject<Shortcut[]> = new BehaviorSubject<Shortcut[]>([]);
   isCollapsed = true;
+  myOwn: boolean;
+
   constructor(private route: ActivatedRoute, private router: Router, private firebase: FirebaseService) {}
 
   ngOnInit() {
@@ -22,8 +24,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     body.classList.add('landing-page');
 
     const username = this.route.snapshot.paramMap.get("username");
+    this.myOwn = Account.getInstance().checkIfUsernameIsMyOwn(username);
     this.user = this.firebase.getUserByUsername(username);
-    this.user.subscribe(user => {
+    this.user.subscribe((user) => {
       this.getShortcuts(user.username);
     });
     // go home if logged out while on profile.
