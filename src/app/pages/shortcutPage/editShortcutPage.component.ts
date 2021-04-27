@@ -13,6 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class EditShortcutPageComponent implements OnInit, OnDestroy {
 
+  id: string;
   pageError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   shortcutNameError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   shortcutUniqueNameExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -42,8 +43,8 @@ export class EditShortcutPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    const id: string = this.route.snapshot.paramMap.get("id");
-    this.shortcut = this.firebase.getShortcutById(id);
+    this.id = this.route.snapshot.paramMap.get("id");
+    this.shortcut = this.firebase.getShortcutById(this.id);
 
     this.shortcutNameError$.subscribe((bool) => {
       this.service.processErrors(this.group, this.control, bool);
@@ -132,6 +133,12 @@ export class EditShortcutPageComponent implements OnInit, OnDestroy {
     if (this.item != null && this.item.categories.indexOf(cate) > -1){
       this.selectedCates = this.item.categories;
       return true;
+    }
+  }
+
+  deleteShortcutFromDB(){
+    if (window.confirm("Are you sure you want to delete this shortcut forever?")){
+      this.service.deleteShortcutFromDB(this.id, this.firebase);
     }
   }
 }

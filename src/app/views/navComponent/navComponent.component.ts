@@ -33,10 +33,10 @@ export class NavComponentComponent implements OnInit, OnDestroy {
     });
     //login immediately if localstorage has username
     if (localStorage.getItem('currentUser')){
-      const username = localStorage.getItem('currentUser');
+      const encryptedUsername = localStorage.getItem('currentUser');
       if (localStorage.getItem("password")){
-        const password = localStorage.getItem('password');
-        this.service.logInFromLocalStorage(username, password, this.firebase);
+        const encryptedPassword = localStorage.getItem('password');
+        this.service.logInFromLocalStorage(encryptedUsername, encryptedPassword, this.firebase);
       }
     }
     if (this.isInShortcut){

@@ -4,7 +4,12 @@
   <div class="section">
     <div class="content">
       <div class="container">
-        <h1>Edit your shortcut:</h1>
+        <div class="row">
+          <h1 class="col-10">Edit your shortcut:</h1>
+          <a class="btn btn-danger nav-link col-1 edit-btn" (click)="deleteShortcutFromDB()">
+            <h4><i class="tim-icons icon-upload"> </i> Delete</h4>
+          </a>
+        </div>
         <div class="row">
           <alert [type]="'primary'" *ngIf="(pageError$ | async)">
             All fields except "Required apps" are required!

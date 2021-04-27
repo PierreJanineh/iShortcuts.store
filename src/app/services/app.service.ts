@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FirebaseService} from './firebase.service';
 import {Account} from '../models/account';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {User} from '../models/user';
 import {Glyphs} from '../models/glyphs';
 import {Colors} from '../models/colors';
@@ -54,9 +54,13 @@ export class AppService {
     });
   }
 
-  logInFromLocalStorage(username: string, password: string, firebase: FirebaseService){
+  logInFromLocalStorage(encryptedUsername: string, encryptedPassword: string, firebase: FirebaseService){
+    const username = this.account.decrypt(true, encryptedUsername);
+    const password = this.account.decrypt(false, encryptedPassword);
     const sub = firebase.getUserByUsername(username).subscribe((user) => {
-      this.account.login(user);
+      if (user.password === password){
+        this.account.login(user);
+      }
       sub.unsubscribe();
     });
   }
@@ -191,6 +195,10 @@ export class AppService {
     this.account.logout();
   }
 
+  deleteShortcutFromDB(id: string, firebase: FirebaseService){
+    firebase.deleteShortcut(id);
+  }
+
   updateAccountInfo(user: User, firebase: FirebaseService){
     firebase.updateUser(user);
     this.account.user = user;
@@ -243,4 +251,5 @@ export class AppService {
     }
     return colors;
   }
+
 }
